@@ -35,6 +35,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/PlayersCircle.o \
 	${OBJECTDIR}/TexasHoldem.o \
 	${OBJECTDIR}/main.o
 
@@ -62,6 +63,11 @@ LDLIBSOPTIONS=
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/project2-17a: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/project2-17a ${OBJECTFILES} ${LDLIBSOPTIONS}
+
+${OBJECTDIR}/PlayersCircle.o: PlayersCircle.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/PlayersCircle.o PlayersCircle.cpp
 
 ${OBJECTDIR}/TexasHoldem.o: TexasHoldem.cpp
 	${MKDIR} -p ${OBJECTDIR}

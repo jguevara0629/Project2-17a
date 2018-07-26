@@ -32,9 +32,17 @@ do{
     char ans;
     // Create a new game of Texas Holdem
     TexasHoldem game;
+    
+    cout << "\nGenerating Number of Opponents for this game...";
+    game.generateNumofPlayers();
+    
+    // create an array of players
+    game.createArrOfPlayers();
+    
+    
     cout << "\nYou will be assigned 10000 chips to play with...\n";
-    game.myChips = 10000;
-    game.roboChips=10000;
+    game.setMyChips(1000);
+    game.setRoboChips(1000);
     
     // Initialize Poker Deck
     game.newDeck();

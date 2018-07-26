@@ -147,12 +147,16 @@ void TexasHoldem::firstFlip()
     std::cout << this->deck[this->card1] << "\n\t\n\t\n\t\n\t\n";
     std::cout << this->deck[this->card2] << "\n\t\n\t\n\t\n\t\n";
     std::cout << this->deck[this->card3] << "\n\t\n\t\n\t\n\t\n";
+    
+    for(int i=0;i<this->getNumOfPlayers();i++){
+            this->roboSortedHand[0][i] = this->card1;
+            this->roboSortedHand[1][i] = this->card2;
+            this->roboSortedHand[2][i] = this->card3;
+    }
     this->sortedHand[0] = this->card1;
     this->sortedHand[1] = this->card2;
     this->sortedHand[2] = this->card3;
-    this->roboSortedHand[0] = this->card1;
-    this->roboSortedHand[1] = this->card2;
-    this->roboSortedHand[2] = this->card3;
+
 }
 void TexasHoldem::myHand()
 {
@@ -179,71 +183,318 @@ void TexasHoldem::myHand()
     this->sortedHand[5] = this->myCard1;
     this->sortedHand[6] = this->myCard2;
 }
-void TexasHoldem::roboHand()
+void TexasHoldem::roboHand(int SIZE)
 {
-    this->roboCard1 = ((rand() % 51) + 0);
-    
-    while(this->card1 == this->roboCard1 || this->card2==this->roboCard1 || 
-          this->card3==this->roboCard1 || this->myCard1==this->roboCard1 ||
-          this->myCard2==this->roboCard1)
+    switch(SIZE)
     {
-     this->roboCard1 = ((rand() % 51) + 0); 
-    }
+        case 1:
+        {
+            this->roboCard1 = ((rand() % 51) + 0);
     
-    this->roboCard2 = ((rand() % 51) + 0);
-    
-    while(this->card1 == this->roboCard2 || this->card2==this->roboCard2 || 
-          this->card3==this->roboCard2 || this->myCard1==this->roboCard2 ||
-          this->myCard2==this->roboCard2 || this->roboCard1 == this->roboCard2)
-    {
-     this->roboCard2 = ((rand() % 51) + 0); 
-    }
-    
-    this->roboSortedHand[5] = this->roboCard1;
-    this->roboSortedHand[6] = this->roboCard2;
-}
-void TexasHoldem::secondFlip()
-{
-    this->card4 = ((rand() % 51) + 0);
-    while(this->card4 == this->card1 || this->card4==this->card2 || 
-          this->card4==this->card3 || this->card4==this->myCard1 || 
-          this->card4 == this->myCard2 || this->card4==this->roboCard1 ||
-          this->card4 == this->roboCard2)
-    
-    {
-     this->card4 = ((rand() % 51) + 0); 
-    }
-    std::cout << "\n**************************************************\n";
-    std::cout << "\n\t4th Card on the Table:\n";
-    std::cout << "\n**************************************************\n";
-    std::cout << this->deck[this->card1] << "\n\t\n\t\n\t\n\t\n";
-    std::cout << this->deck[this->card2] << "\n\t\n\t\n\t\n\t\n";
-    std::cout << this->deck[this->card3] << "\n\t\n\t\n\t\n\t\n";
-    std::cout << this->deck[this->card4] << "\n\t\n\t\n\t\n\t\n";
-    this->sortedHand[3] = this->card4;
-    this->roboSortedHand[3] = this->card4;
-}
-void TexasHoldem::thirdFlip()
-{
-    this->card5 = ((rand() % 51) + 0);
-    while(this->card5 == this->card1 || this->card5==this->card2 || 
-            this->card5==this->card3 || this->card5==this->card4 ||
-            this->card5==this->myCard1 || this->card5 == myCard2 ||
-            this->card5==this->roboCard1 || this->card5==this->roboCard2)
-    {
-     this->card5 = ((rand() % 51) + 0); 
-    }
-    std::cout << "\n**************************************************\n";
-    std::cout << "\n\t5th Card on the Table:\n";
-    std::cout << "\n**************************************************\n";
-    std::cout << this->deck[this->card1] << "\n\t\n\t\n\t\n\t\n";
-    std::cout << this->deck[this->card2] << "\n\t\n\t\n\t\n\t\n";
-    std::cout << this->deck[this->card3] << "\n\t\n\t\n\t\n\t\n";
-    std::cout << this->deck[this->card4] << "\n\t\n\t\n\t\n\t\n";
-    std::cout << this->deck[this->card5] << "\n\t\n\t\n\t\n\t\n";
+            while(this->card1 == this->roboCard1 || this->card2==this->roboCard1 || 
+                  this->card3==this->roboCard1 || this->myCard1==this->roboCard1 ||
+                  this->myCard2==this->roboCard1)
+            {
+             this->roboCard1 = ((rand() % 51) + 0); 
+            }
+
+            this->roboCard2 = ((rand() % 51) + 0);
+
+            while(this->card1 == this->roboCard2 || this->card2==this->roboCard2 || 
+                  this->card3==this->roboCard2 || this->myCard1==this->roboCard2 ||
+                  this->myCard2==this->roboCard2 || this->roboCard1 == this->roboCard2)
+            {
+             this->roboCard2 = ((rand() % 51) + 0); 
+            }
+
+            this->roboSortedHand[5][0] = this->roboCard1;
+            this->roboSortedHand[6][0] = this->roboCard2;
+            break;
+        }
+        case 2:
+        {
+            this->roboCard1 = ((rand() % 51) + 0);
+
+            while(this->card1 == this->roboCard1 || this->card2==this->roboCard1 || 
+                  this->card3==this->roboCard1 || this->myCard1==this->roboCard1 ||
+                  this->myCard2==this->roboCard1)
+            {
+             this->roboCard1 = ((rand() % 51) + 0); 
+            }
+
+            this->roboCard2 = ((rand() % 51) + 0);
+
+            while(this->card1 == this->roboCard2 || this->card2==this->roboCard2 || 
+                  this->card3==this->roboCard2 || this->myCard1==this->roboCard2 ||
+                  this->myCard2==this->roboCard2 || this->roboCard1 == this->roboCard2)
+            {
+             this->roboCard2 = ((rand() % 51) + 0); 
+            }
+
+            this->roboSortedHand[5][0] = this->roboCard1;
+            this->roboSortedHand[6][0] = this->roboCard2;
+            
+            
+            this->roboCard1_2 = ((rand() % 51) + 0);
+            while(this->card1 == this->roboCard1_2 || this->card2==this->roboCard1_2 || 
+                  this->card3==this->roboCard1_2 || this->myCard1==this->roboCard1_2 ||
+                  this->myCard2==this->roboCard1_2 || this->roboCard1 ==this->roboCard1_2||
+                  this->roboCard2==this->roboCard1_2)
+            {
+             this->roboCard1_2 = ((rand() % 51) + 0); 
+            }
+            
+            this->roboCard2_2 = ((rand() % 51) + 0);
+
+            while(this->card1 == this->roboCard2_2 || this->card2==this->roboCard2_2 || 
+                  this->card3==this->roboCard2_2 || this->myCard1==this->roboCard2_2 ||
+                  this->myCard2==this->roboCard2_2 || this->roboCard1 == this->roboCard2_2 ||
+                  this->roboCard2 == this->roboCard2_2 || this->roboCard1_2 == this->roboCard2_2)
+            {
+             this->roboCard2_2 = ((rand() % 51) + 0); 
+            }
+
+            this-> roboSortedHand[5][1] = this->roboCard1_2;
+            this-> roboSortedHand[6][1] = this->roboCard2_2;       
+            break;
+        }
+        case 3:
+        {
+            this->roboCard1 = ((rand() % 51) + 0);
+
+            while(this->card1 == this->roboCard1 || this->card2==this->roboCard1 || 
+                  this->card3==this->roboCard1 || this->myCard1==this->roboCard1 ||
+                  this->myCard2==this->roboCard1)
+            {
+             this->roboCard1 = ((rand() % 51) + 0); 
+            }
+
+            this->roboCard2 = ((rand() % 51) + 0);
+
+            while(this->card1 == this->roboCard2 || this->card2==this->roboCard2 || 
+                  this->card3==this->roboCard2 || this->myCard1==this->roboCard2 ||
+                  this->myCard2==this->roboCard2 || this->roboCard1 == this->roboCard2)
+            {
+             this->roboCard2 = ((rand() % 51) + 0); 
+            }
+
+            this->roboSortedHand[5][0] = this->roboCard1;
+            this->roboSortedHand[6][0] = this->roboCard2;
+            
+            
+            this->roboCard1_2 = ((rand() % 51) + 0);
+            while(this->card1 == this->roboCard1_2 || this->card2==this->roboCard1_2 || 
+                  this->card3==this->roboCard1_2 || this->myCard1==this->roboCard1_2 ||
+                  this->myCard2==this->roboCard1_2 || this->roboCard1 ==this->roboCard1_2||
+                  this->roboCard2==this->roboCard1_2)
+            {
+             this->roboCard1_2 = ((rand() % 51) + 0); 
+            }
+            
+            this->roboCard2_2 = ((rand() % 51) + 0);
+
+            while(this->card1 == this->roboCard2_2 || this->card2==this->roboCard2_2 || 
+                  this->card3==this->roboCard2_2 || this->myCard1==this->roboCard2_2 ||
+                  this->myCard2==this->roboCard2_2 || this->roboCard1 == this->roboCard2_2 ||
+                  this->roboCard2 == this->roboCard2_2 || this->roboCard1_2 == this->roboCard2_2)
+            {
+             this->roboCard2_2 = ((rand() % 51) + 0); 
+            }
+
+            this-> roboSortedHand[5][1] = this->roboCard1_2;
+            this-> roboSortedHand[6][1] = this->roboCard2_2;       
+            
+            
+            this->roboCard1_3 = ((rand() % 51) + 0); 
+            while(this->card1 == this->roboCard1_3 || this->card2==this->roboCard1_3 || 
+                  this->card3==this->roboCard1_3 || this->myCard1==this->roboCard1_3 ||
+                  this->myCard2==this->roboCard1_3 || this->roboCard1 == this->roboCard1_3 ||
+                  this->roboCard2 == this->roboCard1_3 || this->roboCard1_2 == this->roboCard1_3||
+                  this->roboCard2_2 == this->roboCard1_3)
+            {
+             this->roboCard2_2 = ((rand() % 51) + 0); 
+            }
+            
+            this->roboCard2_3 = ((rand() % 51) + 0); 
+            while(this->card1 == this->roboCard2_3 || this->card2==this->roboCard2_3 || 
+                  this->card3==this->roboCard2_3 || this->myCard1==this->roboCard2_3 ||
+                  this->myCard2==this->roboCard2_3 || this->roboCard1 == this->roboCard2_3 ||
+                  this->roboCard2 == this->roboCard2_3 || this->roboCard1_2 == this->roboCard2_3||
+                  this->roboCard2_2 == this->roboCard2_3 || this->roboCard1_3 == this->roboCard2_3)
+            {
+             this->roboCard2_3 = ((rand() % 51) + 0); 
+            }
+            
+            this-> roboSortedHand[5][2] = this->roboCard1_3;
+            this-> roboSortedHand[6][2] = this->roboCard2_3;  
+            
+            
+            
+            break;
+        }
         
-    this->sortedHand[4] = this->card5;
-    this->roboSortedHand[4] = this->card5;
+    }
+    
+}
+void TexasHoldem::secondFlip(int SIZE)
+{
+    switch(SIZE)
+    {
+        case 1:
+        {
+            this->card4 = ((rand() % 51) + 0);
+            while(this->card4 == this->card1 || this->card4==this->card2 || 
+                  this->card4==this->card3 || this->card4==this->myCard1 || 
+                  this->card4 == this->myCard2 || this->card4==this->roboCard1 ||
+                  this->card4 == this->roboCard2)
+
+            {
+             this->card4 = ((rand() % 51) + 0); 
+            }
+            std::cout << "\n**************************************************\n";
+            std::cout << "\n\t4th Card on the Table:\n";
+            std::cout << "\n**************************************************\n";
+            std::cout << this->deck[this->card1] << "\n\t\n\t\n\t\n\t\n";
+            std::cout << this->deck[this->card2] << "\n\t\n\t\n\t\n\t\n";
+            std::cout << this->deck[this->card3] << "\n\t\n\t\n\t\n\t\n";
+            std::cout << this->deck[this->card4] << "\n\t\n\t\n\t\n\t\n";
+            this->sortedHand[3] = this->card4;
+            this->roboSortedHand[3][0] = this->card4;
+            break;
+        }
+        case 2:
+        {
+            this->card4 = ((rand() % 51) + 0);
+            while(this->card4 == this->card1 || this->card4==this->card2 || 
+                  this->card4==this->card3 || this->card4==this->myCard1 || 
+                  this->card4 == this->myCard2 || this->card4==this->roboCard1 ||
+                  this->card4 == this->roboCard2|| this->roboCard1_2 || 
+                  this->card4 == this->roboCard2_2)
+
+            {
+             this->card4 = ((rand() % 51) + 0); 
+            }
+            std::cout << "\n**************************************************\n";
+            std::cout << "\n\t4th Card on the Table:\n";
+            std::cout << "\n**************************************************\n";
+            std::cout << this->deck[this->card1] << "\n\t\n\t\n\t\n\t\n";
+            std::cout << this->deck[this->card2] << "\n\t\n\t\n\t\n\t\n";
+            std::cout << this->deck[this->card3] << "\n\t\n\t\n\t\n\t\n";
+            std::cout << this->deck[this->card4] << "\n\t\n\t\n\t\n\t\n";
+            this->sortedHand[3] = this->card4;
+            this->roboSortedHand[3][0] = this->card4;
+            this->roboSortedHand[3][1] = this->card4;
+            break;
+        }
+        case 3: 
+        {
+            this->card4 = ((rand() % 51) + 0);
+            while(this->card4 == this->card1 || this->card4==this->card2 || 
+                  this->card4==this->card3 || this->card4==this->myCard1 || 
+                  this->card4 == this->myCard2 || this->card4==this->roboCard1 ||
+                  this->card4 == this->roboCard2|| this->roboCard1_2 || 
+                  this->card4 == this->roboCard2_2 || this->card4 == this->roboCard1_3 ||
+                  this->card4 == this->roboCard2_3)
+
+            {
+             this->card4 = ((rand() % 51) + 0); 
+            }
+            std::cout << "\n**************************************************\n";
+            std::cout << "\n\t4th Card on the Table:\n";
+            std::cout << "\n**************************************************\n";
+            std::cout << this->deck[this->card1] << "\n\t\n\t\n\t\n\t\n";
+            std::cout << this->deck[this->card2] << "\n\t\n\t\n\t\n\t\n";
+            std::cout << this->deck[this->card3] << "\n\t\n\t\n\t\n\t\n";
+            std::cout << this->deck[this->card4] << "\n\t\n\t\n\t\n\t\n";
+            this->sortedHand[3] = this->card4;
+            this->roboSortedHand[3][0] = this->card4;
+            this->roboSortedHand[3][1] = this->card4;
+            this->roboSortedHand[3][2] = this->card4;
+            break;
+        }
+    }
+}
+void TexasHoldem::thirdFlip(int SIZE)
+{
+    switch(SIZE)
+    {     
+        case 1:
+        {
+            this->card5 = ((rand() % 51) + 0);
+            while(this->card5 == this->card1 || this->card5==this->card2 || 
+                    this->card5==this->card3 || this->card5==this->card4 ||
+                    this->card5==this->myCard1 || this->card5 == myCard2 ||
+                    this->card5==this->roboCard1 || this->card5==this->roboCard2)
+            {
+             this->card5 = ((rand() % 51) + 0); 
+            }
+            std::cout << "\n**************************************************\n";
+            std::cout << "\n\t5th Card on the Table:\n";
+            std::cout << "\n**************************************************\n";
+            std::cout << this->deck[this->card1] << "\n\t\n\t\n\t\n\t\n";
+            std::cout << this->deck[this->card2] << "\n\t\n\t\n\t\n\t\n";
+            std::cout << this->deck[this->card3] << "\n\t\n\t\n\t\n\t\n";
+            std::cout << this->deck[this->card4] << "\n\t\n\t\n\t\n\t\n";
+            std::cout << this->deck[this->card5] << "\n\t\n\t\n\t\n\t\n";
+
+            this->sortedHand[4] = this->card5;
+            this->roboSortedHand[4][0] = this->card5;
+            break;
+        }
+        case 2:
+        {
+            this->card5 = ((rand() % 51) + 0);
+            while(this->card5 == this->card1 || this->card5==this->card2 || 
+                    this->card5==this->card3 || this->card5==this->card4 ||
+                    this->card5==this->myCard1 || this->card5 == myCard2 ||
+                    this->card5==this->roboCard1 || this->card5==this->roboCard2||
+                    this->card5==this->roboCard1_2 || this->card5 ==this->roboCard2_2)
+            {
+             this->card5 = ((rand() % 51) + 0); 
+            }
+            std::cout << "\n**************************************************\n";
+            std::cout << "\n\t5th Card on the Table:\n";
+            std::cout << "\n**************************************************\n";
+            std::cout << this->deck[this->card1] << "\n\t\n\t\n\t\n\t\n";
+            std::cout << this->deck[this->card2] << "\n\t\n\t\n\t\n\t\n";
+            std::cout << this->deck[this->card3] << "\n\t\n\t\n\t\n\t\n";
+            std::cout << this->deck[this->card4] << "\n\t\n\t\n\t\n\t\n";
+            std::cout << this->deck[this->card5] << "\n\t\n\t\n\t\n\t\n";
+
+            this->sortedHand[4] = this->card5;
+            this->roboSortedHand[4][0] = this->card5;            
+            this->roboSortedHand[4][1] = this->card5;
+            break;
+        }
+        case 3:
+        {
+            this->card5 = ((rand() % 51) + 0);
+            while(this->card5 == this->card1 || this->card5==this->card2 || 
+                    this->card5==this->card3 || this->card5==this->card4 ||
+                    this->card5==this->myCard1 || this->card5 == myCard2 ||
+                    this->card5==this->roboCard1 || this->card5==this->roboCard2||
+                    this->card5==this->roboCard1_2 || this->card5 ==this->roboCard2_2 ||
+                    this->card5==this->roboCard1_3 || this->card5 ==this->roboCard2_3)
+            {
+             this->card5 = ((rand() % 51) + 0); 
+            }
+            std::cout << "\n**************************************************\n";
+            std::cout << "\n\t5th Card on the Table:\n";
+            std::cout << "\n**************************************************\n";
+            std::cout << this->deck[this->card1] << "\n\t\n\t\n\t\n\t\n";
+            std::cout << this->deck[this->card2] << "\n\t\n\t\n\t\n\t\n";
+            std::cout << this->deck[this->card3] << "\n\t\n\t\n\t\n\t\n";
+            std::cout << this->deck[this->card4] << "\n\t\n\t\n\t\n\t\n";
+            std::cout << this->deck[this->card5] << "\n\t\n\t\n\t\n\t\n";
+
+            this->sortedHand[4] = this->card5;
+            this->roboSortedHand[4][0] = this->card5;            
+            this->roboSortedHand[4][1] = this->card5;            
+            this->roboSortedHand[4][2] = this->card5;
+            break;
+        }
+    
+    }
 }
 void TexasHoldem::showMyHand()
 {
@@ -272,13 +523,54 @@ void TexasHoldem::showBest()
         std::cout << this->deck[this->sortedHand[i]] << "\n\t\n\t\n\t\n\t\n";
     
 }
-void TexasHoldem::showRoboBest()
+void TexasHoldem::showRoboBest(int SIZE)
 {
-    std::cout << "\n**************************************************\n";
-    std::cout << "\n\tCards Highest to Lowest:\n";
-    std::cout << "\n**************************************************\n";
-    for(int i=0;i<7;i++)
-        std::cout << this->deck[this->roboSortedHand[i]] << "\n\t\n\t\n\t\n\t\n";
+    switch(SIZE)
+    {
+        case 1:
+        {
+            std::cout << "\n**************************************************\n";
+            std::cout << "\n\tCards Highest to Lowest:\n";
+            std::cout << "\n**************************************************\n";
+            for(int i=0;i<7;i++)
+                std::cout << this->deck[this->roboSortedHand[i][0]] << "\n\t\n\t\n\t\n\t\n";
+            break;
+        }
+        case 2:
+        {
+            std::cout << "\n**************************************************\n";
+            std::cout << "\n\tCards Highest to Lowest for Opponent #1:\n";
+            std::cout << "\n**************************************************\n";
+            for(int i=0;i<7;i++)
+                std::cout << this->deck[this->roboSortedHand[i][0]] << "\n\t\n\t\n\t\n\t\n";  
+            std::cout << "\n**************************************************\n";
+            std::cout << "\n\tCards Highest to Lowest for Opponent #2:\n";
+            std::cout << "\n**************************************************\n";
+            for(int i=0;i<7;i++)
+                std::cout << this->deck[this->roboSortedHand[i][1]] << "\n\t\n\t\n\t\n\t\n";            
+            
+            break;
+        }
+        case 3:
+        {
+            std::cout << "\n**************************************************\n";
+            std::cout << "\n\tCards Highest to Lowest for Opponent #1:\n";
+            std::cout << "\n**************************************************\n";
+            for(int i=0;i<7;i++)
+                std::cout << this->deck[this->roboSortedHand[i][0]] << "\n\t\n\t\n\t\n\t\n";  
+            std::cout << "\n**************************************************\n";
+            std::cout << "\n\tCards Highest to Lowest for Opponent #2:\n";
+            std::cout << "\n**************************************************\n";
+            for(int i=0;i<7;i++)
+                std::cout << this->deck[this->roboSortedHand[i][1]] << "\n\t\n\t\n\t\n\t\n";            
+            std::cout << "\n**************************************************\n";
+            std::cout << "\n\tCards Highest to Lowest for Opponent #3:\n";
+            std::cout << "\n**************************************************\n";
+            for(int i=0;i<7;i++)
+                std::cout << this->deck[this->roboSortedHand[i][2]] << "\n\t\n\t\n\t\n\t\n";  
+            break;
+        }
+    }
     
 }
 void TexasHoldem::findCardNumber()
@@ -558,274 +850,274 @@ void TexasHoldem::findCardNumber()
     }
     
 }
-void TexasHoldem::findRoboCardNumber()
+void TexasHoldem::findRoboCardNumber(int OPPONENT)
 {
  int temp;
 
     for(int i =0; i<7;i++)
     {
-        temp = this->roboSortedHand[i];
+        temp = this->roboSortedHand[i][OPPONENT];
         
         switch(temp)
         {
             case 0:
             {
-                this->roboCardNumber[i] = 1;
+                this->roboCardNumber[i][OPPONENT] = 1;
                 break;
             }
             case 1:
             {
-                this->roboCardNumber[i] = 1;
+                this->roboCardNumber[i][OPPONENT] = 1;
                 break;
             }
             case 2:
             {
-                this->roboCardNumber[i] = 1;
+                this->roboCardNumber[i][OPPONENT] = 1;
                 break;
             }
             case 3:
             {
-                this->roboCardNumber[i] = 1;
+                this->roboCardNumber[i][OPPONENT] = 1;
                 break;
             }
             case 4:
             {
-                this->roboCardNumber[i] = 2;
+                this->roboCardNumber[i][OPPONENT] = 2;
                 break;
             }
             case 5:
             {
-                this->roboCardNumber[i] = 2;
+                this->roboCardNumber[i][OPPONENT] = 2;
                 break;
             }
             case 6:
             {
-                this->roboCardNumber[i] = 2;
+                this->roboCardNumber[i][OPPONENT] = 2;
                 break;
             }
             case 7:
             {
-                this->roboCardNumber[i] = 2;
+                this->roboCardNumber[i][OPPONENT] = 2;
                 break;
             }
             case 8:
             {
-                this->roboCardNumber[i] = 3;
+                this->roboCardNumber[i][OPPONENT] = 3;
                 break;
             }
             case 9:
             {
-                this->roboCardNumber[i] = 3;
+                this->roboCardNumber[i][OPPONENT] = 3;
                 break;
             }
             case 10:
             {
-                this->roboCardNumber[i] = 3;
+                this->roboCardNumber[i][OPPONENT] = 3;
                 break;
             }
             case 11:
             {
-                this->roboCardNumber[i] = 3;
+                this->roboCardNumber[i][OPPONENT] = 3;
                 break;
             }            
             case 12:
             {
-                this->roboCardNumber[i] = 4;
+                this->roboCardNumber[i][OPPONENT] = 4;
                 break;
             }
             case 13:
             {
-                this->roboCardNumber[i] = 4;
+                this->roboCardNumber[i][OPPONENT] = 4;
                 break;
             }
             case 14:
             {
-                this->roboCardNumber[i] = 4;
+                this->roboCardNumber[i][OPPONENT] = 4;
                 break;
             }
             case 15:
             {
-                this->roboCardNumber[i] = 4;
+                this->roboCardNumber[i][OPPONENT] = 4;
                 break;
             }            
             case 16:
             {
-                this->roboCardNumber[i] = 5;
+                this->roboCardNumber[i][OPPONENT] = 5;
                 break;
             }
             case 17:
             {
-                this->roboCardNumber[i] = 5;
+                this->roboCardNumber[i][OPPONENT] = 5;
                 break;
             }
             case 18:
             {
-                this->roboCardNumber[i] = 5;
+                this->roboCardNumber[i][OPPONENT] = 5;
                 break;
             }
             case 19:
             {
-                this->roboCardNumber[i] = 5;
+                this->roboCardNumber[i][OPPONENT] = 5;
                 break;
             }            
             case 20:
             {
-                this->roboCardNumber[i] = 6;
+                this->roboCardNumber[i][OPPONENT] = 6;
                 break;
             }
             case 21:
             {
-                this->roboCardNumber[i] = 6;
+                this->roboCardNumber[i][OPPONENT] = 6;
                 break;
             }
             case 22:
             {
-                this->roboCardNumber[i] = 6;
+                this->roboCardNumber[i][OPPONENT] = 6;
                 break;
             }
             case 23:
             {
-                this->roboCardNumber[i] = 6;
+                this->roboCardNumber[i][OPPONENT] = 6;
                 break;
             }            
             case 24:
             {
-                this->roboCardNumber[i] = 7;
+                this->roboCardNumber[i][OPPONENT] = 7;
                 break;
             }
             case 25:
             {
-                this->roboCardNumber[i] = 7;
+                this->roboCardNumber[i][OPPONENT] = 7;
                 break;
             }
             case 26:
             {
-                this->roboCardNumber[i] = 7;
+                this->roboCardNumber[i][OPPONENT] = 7;
                 break;
             }
             case 27:
             {
-                this->roboCardNumber[i] = 7;
+                this->roboCardNumber[i][OPPONENT] = 7;
                 break;
             }
             case 28:
             {
-                this->roboCardNumber[i] = 8;
+                this->roboCardNumber[i][OPPONENT] = 8;
                 break;
             }
             case 29:
             {
-                this->roboCardNumber[i] = 8;
+                this->roboCardNumber[i][OPPONENT] = 8;
                 break;
             }
             case 30:
             {
-                this->roboCardNumber[i] = 8;
+                this->roboCardNumber[i][OPPONENT] = 8;
                 break;
             }
             case 31:
             {
-                this->roboCardNumber[i] = 8;
+                this->roboCardNumber[i][OPPONENT] = 8;
                 break;
             }
             case 32:
             {
-                this->roboCardNumber[i] = 9;
+                this->roboCardNumber[i][OPPONENT] = 9;
                 break;
             }
             case 33:
             {
-                this->roboCardNumber[i] = 9;
+                this->roboCardNumber[i][OPPONENT] = 9;
                 break;
             }
             case 34:
             {
-                this->roboCardNumber[i] = 9;
+                this->roboCardNumber[i][OPPONENT] = 9;
                 break;
             }
             case 35:
             {
-                this->roboCardNumber[i] = 9;
+                this->roboCardNumber[i][OPPONENT] = 9;
                 break;
             }            
             case 36:
             {
-                this->roboCardNumber[i] = 10;
+                this->roboCardNumber[i][OPPONENT] = 10;
                 break;
             }
             case 37:
             {
-                this->roboCardNumber[i] = 10;
+                this->roboCardNumber[i][OPPONENT] = 10;
                 break;
             }
             case 38:
             {
-                this->roboCardNumber[i] = 10;
+                this->roboCardNumber[i][OPPONENT] = 10;
                 break;
             }
             case 39:
             {
-                this->roboCardNumber[i] = 10;
+                this->roboCardNumber[i][OPPONENT] = 10;
                 break;
             }
             case 40:
             {
-                this->roboCardNumber[i] = 11;
+                this->roboCardNumber[i][OPPONENT] = 11;
                 break;
             }
             case 41:
             {
-                this->roboCardNumber[i] = 11;
+                this->roboCardNumber[i][OPPONENT] = 11;
                 break;
             }
             case 42:
             {
-                this->roboCardNumber[i] = 11;
+                this->roboCardNumber[i][OPPONENT] = 11;
                 break;
             }
             case 43:
             {
-                this->roboCardNumber[i] = 11;
+                this->roboCardNumber[i][OPPONENT] = 11;
                 break;
             }
             case 44:
             {
-                this->roboCardNumber[i] = 12;
+                this->roboCardNumber[i][OPPONENT] = 12;
                 break;
             }
             case 45:
             {
-                this->roboCardNumber[i] = 12;
+                this->roboCardNumber[i][OPPONENT] = 12;
                 break;
             }
             case 46:
             {
-                this->roboCardNumber[i] = 12;
+                this->roboCardNumber[i][OPPONENT] = 12;
                 break;
             }
             case 47:
             {
-                this->roboCardNumber[i] = 12;
+                this->roboCardNumber[i][OPPONENT] = 12;
                 break;
             }
             case 48:
             {
-                this->roboCardNumber[i] = 13;
+                this->roboCardNumber[i][OPPONENT] = 13;
                 break;
             }
             case 49:
             {
-                this->roboCardNumber[i] = 13;
+                this->roboCardNumber[i][OPPONENT] = 13;
                 break;
             }
             case 50:
             {
-                this->roboCardNumber[i] = 13;
+                this->roboCardNumber[i][OPPONENT] = 13;
                 break;
             }
             case 51:
             {
-                this->roboCardNumber[i] = 13;
+                this->roboCardNumber[i][OPPONENT] = 13;
                 break;
             }
 
@@ -840,10 +1132,36 @@ void TexasHoldem::showCardNumber()
     for(int i=0;i<7;i++)
         std::cout << this->cardNumber[i] << std::endl;
 }
-void TexasHoldem::showRoboCardNumber()
+void TexasHoldem::showRoboCardNumber(int SIZE)
 {
-    for(int i=0;i<7;i++)
-        std::cout << this->roboCardNumber[i] << std::endl;
+    switch(SIZE)
+    {
+        case 1:
+        {
+            for(int i=0;i<7;i++)
+                std::cout << this->roboCardNumber[i][0] << std::endl; 
+            break;
+        }
+        case 2:
+        {
+            for(int i=0;i<7;i++)
+                std::cout << this->roboCardNumber[i][0] << std::endl;
+            for(int i=0;i<7;i++)
+                std::cout << this->roboCardNumber[i][1] << std::endl;
+            break;
+        }
+        case 3:
+        {
+            for(int i=0;i<7;i++)
+                std::cout << this->roboCardNumber[i][0] << std::endl;
+            for(int i=0;i<7;i++)
+                std::cout << this->roboCardNumber[i][1] << std::endl;
+            for(int i=0;i<7;i++)
+                std::cout << this->roboCardNumber[i][2] << std::endl;
+            break;
+        }
+    }
+
 }
 void TexasHoldem::whatSuit()
 {
@@ -1122,274 +1440,274 @@ void TexasHoldem::whatSuit()
     }
     
 }
-void TexasHoldem::whatRoboSuit()
+void TexasHoldem::whatRoboSuit(int OPPONENT)
 {
     int temp;
     
     for(int i =0; i<7;i++)
     {
-        temp = this->roboSortedHand[i];
+        temp = this->roboSortedHand[i][OPPONENT];
         
         switch(temp)
         {
             case 0:
             {
-                this->roboSuit[i] = "Hearts";
+                this->roboSuit[i][OPPONENT] = "Hearts";
                 break;
             }
             case 1:
             {
-                this->roboSuit[i] = "Spades";
+                this->roboSuit[i][OPPONENT] = "Spades";
                 break;
             }
             case 2:
             {
-                this->roboSuit[i] = "Diamonds";
+                this->roboSuit[i][OPPONENT] = "Diamonds";
                 break;
             }
             case 3:
             {
-                this->roboSuit[i] = "Clubs";
+                this->roboSuit[i][OPPONENT] = "Clubs";
                 break;
             }
             case 4:
             {
-                this->roboSuit[i] = "Hearts";
+                this->roboSuit[i][OPPONENT] = "Hearts";
                 break;
             }
             case 5:
             {
-                this->roboSuit[i] = "Spades";
+                this->roboSuit[i][OPPONENT] = "Spades";
                 break;
             }
             case 6:
             {
-                this->roboSuit[i] = "Diamonds";
+                this->roboSuit[i][OPPONENT] = "Diamonds";
                 break;
             }
             case 7:
             {
-                this->roboSuit[i] = "Clubs";
+                this->roboSuit[i][OPPONENT] = "Clubs";
                 break;
             }
             case 8:
             {
-                this->roboSuit[i] = "Hearts";
+                this->roboSuit[i][OPPONENT] = "Hearts";
                 break;
             }
             case 9:
             {
-                this->roboSuit[i] = "Spades";
+                this->roboSuit[i][OPPONENT] = "Spades";
                 break;
             }
             case 10:
             {
-                this->roboSuit[i] = "Diamonds";
+                this->roboSuit[i][OPPONENT] = "Diamonds";
                 break;
             }
             case 11:
             {
-                this->roboSuit[i] = "Clubs";
+                this->roboSuit[i][OPPONENT] = "Clubs";
                 break;
             }            
             case 12:
             {
-                this->roboSuit[i] = "Hearts";
+                this->roboSuit[i][OPPONENT] = "Hearts";
                 break;
             }
             case 13:
             {
-                this->roboSuit[i] = "Spades";
+                this->roboSuit[i][OPPONENT] = "Spades";
                 break;
             }
             case 14:
             {
-                this->roboSuit[i] = "Diamonds";
+                this->roboSuit[i][OPPONENT] = "Diamonds";
                 break;
             }
             case 15:
             {
-                this->roboSuit[i] = "Clubs";
+                this->roboSuit[i][OPPONENT] = "Clubs";
                 break;
             }            
             case 16:
             {
-                this->roboSuit[i] = "Hearts";
+                this->roboSuit[i][OPPONENT] = "Hearts";
                 break;
             }
             case 17:
             {
-                this->roboSuit[i] = "Spades";
+                this->roboSuit[i][OPPONENT] = "Spades";
                 break;
             }
             case 18:
             {
-                this->roboSuit[i] = "Diamonds";
+                this->roboSuit[i][OPPONENT] = "Diamonds";
                 break;
             }
             case 19:
             {
-                this->roboSuit[i] = "Clubs";
+                this->roboSuit[i][OPPONENT] = "Clubs";
                 break;
             }            
             case 20:
             {
-                this->roboSuit[i] = "Hearts";
+                this->roboSuit[i][OPPONENT] = "Hearts";
                 break;
             }
             case 21:
             {
-                this->roboSuit[i] = "Spades";
+                this->roboSuit[i][OPPONENT] = "Spades";
                 break;
             }
             case 22:
             {
-                this->roboSuit[i] = "Diamonds";
+                this->roboSuit[i][OPPONENT] = "Diamonds";
                 break;
             }
             case 23:
             {
-                this->roboSuit[i] = "Clubs";
+                this->roboSuit[i][OPPONENT] = "Clubs";
                 break;
             }            
             case 24:
             {
-                this->roboSuit[i] = "Hearts";
+                this->roboSuit[i][OPPONENT] = "Hearts";
                 break;
             }
             case 25:
             {
-                this->roboSuit[i] = "Spades";
+                this->roboSuit[i][OPPONENT] = "Spades";
                 break;
             }
             case 26:
             {
-                this->roboSuit[i] = "Diamonds";
+                this->roboSuit[i][OPPONENT] = "Diamonds";
                 break;
             }
             case 27:
             {
-                this->roboSuit[i] = "Clubs";
+                this->roboSuit[i][OPPONENT] = "Clubs";
                 break;
             }
             case 28:
             {
-                this->roboSuit[i] = "Hearts";
+                this->roboSuit[i][OPPONENT] = "Hearts";
                 break;
             }
             case 29:
             {
-                this->roboSuit[i] = "Spades";
+                this->roboSuit[i][OPPONENT] = "Spades";
                 break;
             }
             case 30:
             {
-                this->roboSuit[i] = "Diamonds";
+                this->roboSuit[i][OPPONENT] = "Diamonds";
                 break;
             }
             case 31:
             {
-                this->roboSuit[i] = "Clubs";
+                this->roboSuit[i][OPPONENT] = "Clubs";
                 break;
             }
             case 32:
             {
-                this->roboSuit[i] = "Hearts";
+                this->roboSuit[i][OPPONENT] = "Hearts";
                 break;
             }
             case 33:
             {
-                this->roboSuit[i] = "Spades";
+                this->roboSuit[i][OPPONENT] = "Spades";
                 break;
             }
             case 34:
             {
-                this->roboSuit[i] = "Diamonds";
+                this->roboSuit[i][OPPONENT] = "Diamonds";
                 break;
             }
             case 35:
             {
-                this->roboSuit[i] = "Clubs";
+                this->roboSuit[i][OPPONENT] = "Clubs";
                 break;
             }            
             case 36:
             {
-                this->roboSuit[i] = "Hearts";
+                this->roboSuit[i][OPPONENT] = "Hearts";
                 break;
             }
             case 37:
             {
-                this->roboSuit[i] = "Spades";
+                this->roboSuit[i][OPPONENT] = "Spades";
                 break;
             }
             case 38:
             {
-                this->roboSuit[i] = "Diamonds";
+                this->roboSuit[i][OPPONENT] = "Diamonds";
                 break;
             }
             case 39:
             {
-                this->roboSuit[i] = "Clubs";
+                this->roboSuit[i][OPPONENT] = "Clubs";
                 break;
             }
             case 40:
             {
-                this->roboSuit[i] = "Hearts";
+                this->roboSuit[i][OPPONENT] = "Hearts";
                 break;
             }
             case 41:
             {
-                this->roboSuit[i] = "Spades";
+                this->roboSuit[i][OPPONENT] = "Spades";
                 break;
             }
             case 42:
             {
-                this->roboSuit[i] = "Diamonds";
+                this->roboSuit[i][OPPONENT] = "Diamonds";
                 break;
             }
             case 43:
             {
-                this->roboSuit[i] = "Clubs";
+                this->roboSuit[i][OPPONENT] = "Clubs";
                 break;
             }
             case 44:
             {
-                this->roboSuit[i] = "Hearts";
+                this->roboSuit[i][OPPONENT] = "Hearts";
                 break;
             }
             case 45:
             {
-                this->roboSuit[i] = "Spades";
+                this->roboSuit[i][OPPONENT] = "Spades";
                 break;
             }
             case 46:
             {
-                this->roboSuit[i] = "Diamonds";
+                this->roboSuit[i][OPPONENT] = "Diamonds";
                 break;
             }
             case 47:
             {
-                this->roboSuit[i] = "Clubs";
+                this->roboSuit[i][OPPONENT] = "Clubs";
                 break;
             }
             case 48:
             {
-                this->roboSuit[i] = "Hearts";
+                this->roboSuit[i][OPPONENT] = "Hearts";
                 break;
             }
             case 49:
             {
-                this->roboSuit[i] = "Spades";
+                this->roboSuit[i][OPPONENT] = "Spades";
                 break;
             }
             case 50:
             {
-                this->roboSuit[i] = "Diamonds";
+                this->roboSuit[i][OPPONENT] = "Diamonds";
                 break;
             }
             case 51:
             {
-                this->roboSuit[i] = "Clubs";
+                this->roboSuit[i][OPPONENT] = "Clubs";
                 break;
             }
 
@@ -1404,20 +1722,78 @@ void TexasHoldem::showSuit()
     for(int i=0;i<7;i++)
         std::cout << this->suit[i] << std::endl;
 }
-void TexasHoldem::showRoboSuit()
+void TexasHoldem::showRoboSuit(int OPPONENT)
 {
-    for(int i=0;i<7;i++)
-        std::cout << this->roboSuit[i] << std::endl;
+    switch(OPPONENT)
+    {
+        case 1:
+        {
+            std::cout<<"Player #1 Suit: " << std::endl; 
+            for(int i=0;i<7;i++)
+                std::cout << this->roboSuit[i][0] << std::endl;
+            break;
+        }
+        case 2:
+        {
+           std::cout<<"Player #1 Suit: " << std::endl;  
+           for(int i=0;i<7;i++)
+                std::cout << this->roboSuit[i][0] << std::endl;
+           std::cout<<"Player #2 Suit: " << std::endl; 
+           for(int i=0;i<7;i++)
+                std::cout << this->roboSuit[i][1] << std::endl;
+            break;
+        }
+        case 3:
+        {
+            std::cout<<"Player #1 Suit: " << std::endl; 
+            for(int i=0;i<7;i++)
+                std::cout << this->roboSuit[i][0] << std::endl;
+            std::cout<<"Player #2 Suit: " << std::endl; 
+            for(int i=0;i<7;i++)
+                std::cout << this->roboSuit[i][1] << std::endl;
+            std::cout<<"Player #3 Suit: " << std::endl; 
+            for(int i=0;i<7;i++)
+                std::cout << this->roboSuit[i][2] << std::endl;
+            break;
+        }
+    }
 }
 void TexasHoldem::findDiff()
 {
     for(int i=0;i<6;i++)
         this->diff[i] = (this->cardNumber[i] - this->cardNumber[i+1]);
 }
-void TexasHoldem::findRoboDiff()
+void TexasHoldem::findRoboDiff(int SIZE)
 {
-    for(int i=0;i<6;i++)
-        this->roboDiff[i] = (this->roboCardNumber[i] - this->roboCardNumber[i+1]);
+    switch(SIZE)
+    {
+        case 1:
+        {
+            for(int i=0;i<6;i++)
+                this->roboDiff[i][0] = (this->roboCardNumber[i][0] - this->roboCardNumber[i+1][0]);
+            break;
+        }
+        case 2:
+        {
+            for(int i=0;i<6;i++)
+                this->roboDiff[i][0] = (this->roboCardNumber[i][0] - this->roboCardNumber[i+1][0]);
+            for(int i=0;i<6;i++)
+                this->roboDiff[i][1] = (this->roboCardNumber[i][1] - this->roboCardNumber[i+1][1]);
+            break;                        
+        }
+        case 3:
+        {
+            for(int i=0;i<6;i++)
+                this->roboDiff[i][0] = (this->roboCardNumber[i][0] - this->roboCardNumber[i+1][0]);
+            for(int i=0;i<6;i++)
+                this->roboDiff[i][1] = (this->roboCardNumber[i][1] - this->roboCardNumber[i+1][1]);
+            for(int i=0;i<6;i++)
+                this->roboDiff[i][2] = (this->roboCardNumber[i][2] - this->roboCardNumber[i+1][2]);
+            break;
+            
+            
+        }
+}
 }
 void TexasHoldem::showDiff()
 {
@@ -1426,8 +1802,34 @@ void TexasHoldem::showDiff()
 }
 void TexasHoldem::showRoboDiff()
 {
-    for(int i=0;i<6;i++)
-        std::cout << this->roboDiff[i] << std::endl;
+    switch(SIZE)
+    {
+        case 1:
+        {
+            for(int i=0;i<6;i++)
+                std::cout << this->roboDiff[i][0] << std::endl;
+        break;
+        }
+        case 2:
+        {
+            for(int i=0;i<6;i++)
+                std::cout << this->roboDiff[i][0] << std::endl;
+            for(int i=0;i<6;i++)
+                std::cout << this->roboDiff[i][1] << std::endl;
+       
+            break;
+        }
+        case 3:
+        {
+            for(int i=0;i<6;i++)
+                std::cout << this->roboDiff[i][0] << std::endl;
+            for(int i=0;i<6;i++)
+                std::cout << this->roboDiff[i][1] << std::endl;
+            for(int i=0;i<6;i++)
+                std::cout << this->roboDiff[i][2] << std::endl;         
+            break;
+        }
+    }
 }
 void TexasHoldem::suitCount()
 {
@@ -1453,29 +1855,144 @@ void TexasHoldem::suitCount()
     std::cout << "Clubs: " << this->clubsCount << std::endl;
     std::cout << "Spades: " << this->spadesCount << std::endl;
 }
-void TexasHoldem::roboSuitCount()
+void TexasHoldem::roboSuitCount(int PLAYERS)
 {
-    this->roboHeartsCount =0;
-    this->roboDiamondsCount =0;
-    this->roboClubsCount = 0;
-    this->roboSpadesCount =0;
-    
-    for(int i=0;i<7;i++)
+    switch(PLAYERS)
     {
-        if(this->roboSuit[i] == "Hearts")
-            this->roboHeartsCount = this->roboHeartsCount + 1;
-        if(this->roboSuit[i]== "Diamonds")
-            this->roboDiamondsCount = this->roboDiamondsCount + 1;
-        if(this->roboSuit[i] == "Clubs")
-            this->roboClubsCount = this->roboClubsCount + 1;
-        if(this->roboSuit[i] == "Spades")
-            this->roboSpadesCount = this->roboSpadesCount + 1;
+        case 1:
+        {
+            this->roboHeartsCount1 =0;
+            this->roboDiamondsCount1 =0;
+            this->roboClubsCount1 = 0;
+            this->roboSpadesCount1 =0;
+
+            for(int i=0;i<7;i++)
+            {
+                if(this->roboSuit[i][0] == "Hearts")
+                    this->roboHeartsCount1 = this->roboHeartsCount1 + 1;
+                if(this->roboSuit[i][0]== "Diamonds")
+                    this->roboDiamondsCount1 = this->roboDiamondsCount1 + 1;
+                if(this->roboSuit[i][0] == "Clubs")
+                    this->roboClubsCount1 = this->roboClubsCount1 + 1;
+                if(this->roboSuit[i][0] == "Spades")
+                    this->roboSpadesCount1 = this->roboSpadesCount1 + 1;
+            }
+
+            std::cout << "Player #1 Hearts  : " << this->roboHeartsCount1 << std::endl;
+            std::cout << "Player #1 Diamonds: " << this->roboDiamondsCount1 << std::endl;
+            std::cout << "Player #1 Clubs   : " << this->roboClubsCount1 << std::endl;
+            std::cout << "Player #1 Spades  : " << this->roboSpadesCount1 << std::endl;
+            break;
+        }
+        case 2:
+        {
+            this->roboHeartsCount1 =0;
+            this->roboDiamondsCount1 =0;
+            this->roboClubsCount1 = 0;
+            this->roboSpadesCount1 =0;
+            
+            this->roboHeartsCount2 =0;
+            this->roboDiamondsCount2 =0;
+            this->roboClubsCount2 = 0;
+            this->roboSpadesCount2 =0;
+            
+            for(int i=0;i<7;i++)
+            {
+                if(this->roboSuit[i][0] == "Hearts")
+                    this->roboHeartsCount1 = this->roboHeartsCount1 + 1;
+                if(this->roboSuit[i][0]== "Diamonds")
+                    this->roboDiamondsCount1 = this->roboDiamondsCount1 + 1;
+                if(this->roboSuit[i][0] == "Clubs")
+                    this->roboClubsCount1 = this->roboClubsCount1 + 1;
+                if(this->roboSuit[i][0] == "Spades")
+                    this->roboSpadesCount1 = this->roboSpadesCount1 + 1;
+            }
+            for(int i=0;i<7;i++)
+            {
+                if(this->roboSuit[i][1] == "Hearts")
+                    this->roboHeartsCount2 = this->roboHeartsCount2 + 1;
+                if(this->roboSuit[i][1]== "Diamonds")
+                    this->roboDiamondsCount2 = this->roboDiamondsCount2 + 1;
+                if(this->roboSuit[i][1] == "Clubs")
+                    this->roboClubsCount2 = this->roboClubsCount2 + 1;
+                if(this->roboSuit[i][1] == "Spades")
+                    this->roboSpadesCount2 = this->roboSpadesCount2 + 1;
+            }
+            std::cout << "Player #1 Hearts  : " << this->roboHeartsCount1 << std::endl;
+            std::cout << "Player #1 Diamonds: " << this->roboDiamondsCount1 << std::endl;
+            std::cout << "Player #1 Clubs   : " << this->roboClubsCount1 << std::endl;
+            std::cout << "Player #1 Spades  : " << this->roboSpadesCount1 << std::endl;
+            std::cout << "Player #2 Hearts  : " << this->roboHeartsCount2 << std::endl;
+            std::cout << "Player #2 Diamonds: " << this->roboDiamondsCount2 << std::endl;
+            std::cout << "Player #2 Clubs   : " << this->roboClubsCount2 << std::endl;
+            std::cout << "Player #2 Spades  : " << this->roboSpadesCount2 << std::endl;
+            break;
+        }
+        case 3:
+        {
+            this->roboHeartsCount1 =0;
+            this->roboDiamondsCount1 =0;
+            this->roboClubsCount1 = 0;
+            this->roboSpadesCount1 =0;
+            
+            this->roboHeartsCount2 =0;
+            this->roboDiamondsCount2 =0;
+            this->roboClubsCount2 = 0;
+            this->roboSpadesCount2 =0;
+            
+            this->roboHeartsCount3 =0;
+            this->roboDiamondsCount3 =0;
+            this->roboClubsCount3 = 0;
+            this->roboSpadesCount3 =0;
+            
+            for(int i=0;i<7;i++)
+            {
+                if(this->roboSuit[i][0] == "Hearts")
+                    this->roboHeartsCount1 = this->roboHeartsCount1 + 1;
+                if(this->roboSuit[i][0]== "Diamonds")
+                    this->roboDiamondsCount1 = this->roboDiamondsCount1 + 1;
+                if(this->roboSuit[i][0] == "Clubs")
+                    this->roboClubsCount1 = this->roboClubsCount1 + 1;
+                if(this->roboSuit[i][0] == "Spades")
+                    this->roboSpadesCount1 = this->roboSpadesCount1 + 1;
+            }
+            for(int i=0;i<7;i++)
+            {
+                if(this->roboSuit[i][1] == "Hearts")
+                    this->roboHeartsCount2 = this->roboHeartsCount2 + 1;
+                if(this->roboSuit[i][1]== "Diamonds")
+                    this->roboDiamondsCount2 = this->roboDiamondsCount2 + 1;
+                if(this->roboSuit[i][1] == "Clubs")
+                    this->roboClubsCount2 = this->roboClubsCount2 + 1;
+                if(this->roboSuit[i][1] == "Spades")
+                    this->roboSpadesCount2 = this->roboSpadesCount2 + 1;
+            }
+            for(int i=0;i<7;i++)
+            {
+                if(this->roboSuit[i][2] == "Hearts")
+                    this->roboHeartsCount3 = this->roboHeartsCount3 + 1;
+                if(this->roboSuit[i][2]== "Diamonds")
+                    this->roboDiamondsCount3 = this->roboDiamondsCount3 + 1;
+                if(this->roboSuit[i][2] == "Clubs")
+                    this->roboClubsCount3 = this->roboClubsCount3 + 1;
+                if(this->roboSuit[i][2] == "Spades")
+                    this->roboSpadesCount3 = this->roboSpadesCount3 + 1;
+            }
+            std::cout << "Player #1 Hearts  : " << this->roboHeartsCount1 << std::endl;
+            std::cout << "Player #1 Diamonds: " << this->roboDiamondsCount1 << std::endl;
+            std::cout << "Player #1 Clubs   : " << this->roboClubsCount1 << std::endl;
+            std::cout << "Player #1 Spades  : " << this->roboSpadesCount1 << std::endl;
+            std::cout << "Player #2 Hearts  : " << this->roboHeartsCount2 << std::endl;
+            std::cout << "Player #2 Diamonds: " << this->roboDiamondsCount2 << std::endl;
+            std::cout << "Player #2 Clubs   : " << this->roboClubsCount2 << std::endl;
+            std::cout << "Player #2 Spades  : " << this->roboSpadesCount2 << std::endl;
+            std::cout << "Player #3 Hearts  : " << this->roboHeartsCount3 << std::endl;
+            std::cout << "Player #3 Diamonds: " << this->roboDiamondsCount3 << std::endl;
+            std::cout << "Player #3 Clubs   : " << this->roboClubsCount3 << std::endl;
+            std::cout << "Player #3 Spades  : " << this->roboSpadesCount3 << std::endl;           
+            break;            
+        }
     }
-    
-    std::cout << "Hearts: " << this->roboHeartsCount << std::endl;
-    std::cout << "Diamonds: " << this->roboDiamondsCount << std::endl;
-    std::cout << "Clubs: " << this->roboClubsCount << std::endl;
-    std::cout << "Spades: " << this->roboSpadesCount << std::endl;
 }
 void TexasHoldem::bestHand()
 {
@@ -1895,422 +2412,2519 @@ void TexasHoldem::bestHand()
     }
    
 }
-void TexasHoldem::bestRoboHand()
+void TexasHoldem::bestRoboHand(int PLAYERS)
 {
-    // ************************************************************************
-    // ************************************************************************
-    //                      ROYAL FLUSH
-    // ************************************************************************
-    // ************************************************************************
-    // ROYAL FLUSH: 10 through ACE -- HEARTS
-    if(this->roboHeartsCount == 5 && this->roboCardNumber[0] == 13 &&
-       this->roboCardNumber[1] == 12 && this->roboCardNumber[2] == 11 &&
-       this->roboCardNumber[3] == 10 && this->roboCardNumber[7] == 1)
+    switch(PLAYERS)
     {
-        std::cout << "ROYAL FLUSH of HEARTS" << std::endl;
-        this->roboPoints=10;
+            case 1:
+            {
+                // ************************************************************************
+                // ************************************************************************
+                //                      ROYAL FLUSH
+                // ************************************************************************
+                // ************************************************************************
+                // ROYAL FLUSH: 10 through ACE -- HEARTS
+                if(this->roboHeartsCount1 == 5 && this->roboCardNumber[0][0] == 13 &&
+                   this->roboCardNumber[1][0] == 12 && this->roboCardNumber[2][0] == 11 &&
+                   this->roboCardNumber[3][0] == 10 && this->roboCardNumber[7][0] == 1)
+                {
+                    std::cout << "ROYAL FLUSH of HEARTS" << std::endl;
+                    this->roboPoints1=10;
+                }
+                // ROYAL FLUSH: 10 through ACE -- CLUBS
+                else if(this->roboClubsCount1 == 5 && this->roboCardNumber[0][0] == 13 &&
+                   this->roboCardNumber[1][0] == 12 && this->roboCardNumber[2][0] == 11 &&
+                   this->roboCardNumber[3][0] == 10 && this->roboCardNumber[7][0] == 1)
+                {
+                    std::cout << "ROYAL FLUSH of CLUBS" << std::endl;
+                    this->roboPoints1=10;
+                }    
+                // ROYAL FLUSH: 10 through ACE -- SPADES
+                else if(this->roboSpadesCount1 == 5 && this->roboCardNumber[0][0] == 13 &&
+                   this->roboCardNumber[1][0] == 12 && this->roboCardNumber[2][0] == 11 &&
+                   this->roboCardNumber[3][0] == 10 && this->roboCardNumber[7][0] == 1)
+                {
+                    std::cout << "ROYAL FLUSH of SPADES" << std::endl;
+                    this->roboPoints1=10;
+                }     
+                // ROYAL FLUSH: 10 through ACE -- DIAMONDS
+                else if(this->roboDiamondsCount1 == 5 && this->cardNumber[0][0] == 13 &&
+                   this->roboCardNumber[1][0] == 12 && this->roboCardNumber[2][0] == 11 &&
+                   this->roboCardNumber[3][0] == 10 && this->roboCardNumber[7][0] == 1)
+                {
+                    std::cout << "ROYAL FLUSH of DIAMONDS" << std::endl;
+                    this->roboPoints1=10;
+                }       
+                // ************************************************************************
+                // ************************************************************************
+                //                      STRAIGHT FLUSH
+                // ************************************************************************
+                // ************************************************************************    
+                // STRAIGHT FLUSH: ANY SEQUENCE OF FIVE CARDS + SAME SUITS 
+                else if(this->roboHeartsCount1 == 5 && this->roboDiff[0][0] == 1 &&
+                   this->roboDiff[1][0] == 1 && this->roboDiff[2][0] == 1 &&
+                   this->roboDiff[3][0] == 1 && this->roboDiff[4][0] == 1)
+                {
+                    std::cout << "STRAIGHT FLUSH of HEARTS" << std::endl;
+                    this->roboPoints1=9;
+                }
+
+                else if(this->roboHeartsCount1 == 5 && this->roboDiff[1][0] == 1 &&
+                   this->roboDiff[2][0] == 1 && this->roboDiff[3][0] == 1 &&
+                   this->roboDiff[4][0] == 1 && this->roboDiff[5][0] == 1)
+                {
+                    std::cout << "STRAIGHT FLUSH of HEARTS" << std::endl;
+                    this->roboPoints1=9;
+                }
+                else if(this->roboClubsCount1 == 5 && this->roboDiff[0][0] == 1 &&
+                   this->roboDiff[1][0] == 1 && this->roboDiff[2][0] == 1 &&
+                   this->roboDiff[3][0] == 1 && this->roboDiff[4][0] == 1)
+                {
+                    std::cout << "STRAIGHT FLUSH of CLUBS" << std::endl;
+                    this->roboPoints1=9;
+                }
+
+                else if(this->roboClubsCount1 == 5 && this->roboDiff[1][0] == 1 &&
+                   this->roboDiff[2][0] == 1 && this->roboDiff[3][0] == 1 &&
+                   this->roboDiff[4][0] == 1 && this->roboDiff[5][0] == 1)
+                {
+                    std::cout << "STRAIGHT FLUSH of CLUBS" << std::endl;
+                    this->roboPoints1=9;
+                }
+                else if(this->roboSpadesCount1 == 5 && this->roboDiff[0][0] == 1 &&
+                   this->roboDiff[1][0] == 1 && this->roboDiff[2][0] == 1 &&
+                   this->roboDiff[3][0] == 1 && this->roboDiff[4][0] == 1)
+                {
+                    std::cout << "STRAIGHT FLUSH of SPADES" << std::endl;
+                    this->roboPoints1=9;
+                }
+
+                else if(this->roboSpadesCount1 == 5 && this->roboDiff[1][0] == 1 &&
+                   this->roboDiff[2][0] == 1 && this->roboDiff[3][0] == 1 &&
+                   this->roboDiff[4][0] == 1 && this->roboDiff[5][0] == 1)
+                {
+                    std::cout << "STRAIGHT FLUSH of SPADES" << std::endl;
+                    this->roboPoints1=9;
+                }
+                else if(this->roboDiamondsCount1 == 5 && this->roboDiff[0][0] == 1 &&
+                   this->roboDiff[1][0] == 1 && this->roboDiff[2][0] == 1 &&
+                   this->roboDiff[3][0] == 1 && this->roboDiff[4][0] == 1)
+                {
+                    std::cout << "STRAIGHT FLUSH of DIAMONDS" << std::endl;
+                    this->roboPoints1=9;
+                }
+
+                else if(this->roboDiamondsCount1 == 5 && this->roboDiff[1][0] == 1 &&
+                   this->roboDiff[2][0] == 1 && this->roboDiff[3][0] == 1 &&
+                   this->roboDiff[4][0] == 1 && this->roboDiff[5][0] == 1)
+                {
+                    std::cout << "STRAIGHT FLUSH of DIAMONDS" << std::endl;
+                    this->roboPoints1=9;
+                }       
+                // ************************************************************************
+                // ************************************************************************
+                //                      FOUR OF A KIND
+                // ************************************************************************
+                // ************************************************************************    
+                else if(this->roboDiff[0][0] == 0 && this->roboDiff[1][0] ==0 && 
+                        this->roboDiff[2][0] ==0 && this->roboDiff[3][0] == 0)
+                {
+                    std::cout << "FOUR OF A KIND!" << std::endl;
+                    this->roboPoints1=8;
+                }
+                else if(this->roboDiff[1][0] == 0 && this->roboDiff[2][0] ==0 && 
+                        this->roboDiff[3][0] ==0 && this->roboDiff[4][0] == 0)
+                {
+                    std::cout << "FOUR OF A KIND!" << std::endl;
+                    this->roboPoints1=8;
+                }
+                else if(this->roboDiff[2][0] == 0 && this->roboDiff[3][0] ==0 && 
+                        this->roboDiff[4][0] ==0 && this->roboDiff[5][0] == 0)
+                {
+                    std::cout << "FOUR OF A KIND!" << std::endl;
+                    this->roboPoints1=8;
+                }
+                // ************************************************************************
+                // ************************************************************************
+                //                      FULL HOUSE
+                // ************************************************************************
+                // ************************************************************************  
+                 else if(this->roboDiff[0][0] == 0 && this->roboDiff[2][0] ==0 && this->roboDiff[3][0] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints1=7;
+                }
+                else if(this->roboDiff[0][0] == 0 && this->roboDiff[3][0] ==0 && this->roboDiff[4][0] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints1=7;
+                }
+                else if(this->roboDiff[0][0] == 0 && this->roboDiff[4][0] ==0 && this->roboDiff[5][0] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints1=7;
+                }
+                else if(this->roboDiff[1][0] == 0 && this->roboDiff[3][0] ==0 && this->roboDiff[4][0] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints1=7;
+                }
+                else if(this->roboDiff[1][0] == 0 && this->roboDiff[4][0] ==0 && this->roboDiff[5][0] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints1=7;
+                }
+                else if(this->roboDiff[2][0] == 0 && this->roboDiff[4][0] ==0 && this->roboDiff[5][0] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints1=7;
+                }
+                else if(this->roboDiff[3][0] == 0 && this->roboDiff[0][0] ==0 && this->roboDiff[1][0] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints1=7;
+                }
+                else if(this->roboDiff[4][0] == 0 && this->roboDiff[0][0] ==0 && this->roboDiff[1][0] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints1=7;
+                }
+                else if(this->roboDiff[4][0] == 0 && this->roboDiff[1][0] ==0 && this->roboDiff[2][0] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints1=7;
+                }
+                else if(this->roboDiff[5][0] == 0 && this->roboDiff[0][0] ==0 && this->roboDiff[1][0] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints1=7;
+                }
+                else if(this->roboDiff[5][0] == 0 && this->roboDiff[1][0] ==0 && this->roboDiff[2][0] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints1=7;
+                }
+                else if(this->roboDiff[5][0] == 0 && this->roboDiff[2][0] ==0 && this->roboDiff[3][0] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints1=7;
+                }
+                // ************************************************************************
+                // ************************************************************************
+                //                      FLUSH
+                // ************************************************************************
+                // ************************************************************************  
+                else if(this->roboHeartsCount1 == 5)
+                {
+                    std::cout << "FLUSH OF HEARTS" <<std::endl;
+                    this->roboPoints1=6;
+                }
+                else if(this->roboSpadesCount1 == 5)
+                {
+                    std::cout << "FLUSH OF SPADES" << std::endl;
+                    this->roboPoints1=6;
+                }
+                else if(this->roboDiamondsCount1 == 5)
+                {
+                    std::cout << "FLUSH OF DIAMONDS" << std::endl;
+                    this->roboPoints1=6;
+                }
+                else if(this->roboClubsCount1 == 5)
+                {
+                    std::cout << "FLUSH OF CLUBS" << std::endl;
+                    this->roboPoints1=6;
+                }
+               // ************************************************************************
+               // ************************************************************************
+               //                      STRAIGHT
+               // ************************************************************************
+               // ************************************************************************   
+                else if(this->roboDiff[0][0] == 1 && this->roboDiff[1][0] == 1 && this->roboDiff[2][0] == 1 &&
+                        this->roboDiff[3][0] == 1 && this->roboDiff[4][0] == 1)
+                {
+                    std::cout << "STRAIGHT" << std::endl;
+                    this->roboPoints1=5;
+                }
+                else if(this->roboDiff[1][0] == 1 && this->roboDiff[2][0] == 1 && this->roboDiff[3][0] == 1 &&
+                        this->roboDiff[4][0] == 1 && this->roboDiff[5][0] == 1)
+                {
+                    std::cout << "STRAIGHT" << std::endl;
+                    this->roboPoints1=5;
+                }
+               // ************************************************************************
+               // ************************************************************************
+               //                      3 of a KIND
+               // ************************************************************************
+               // ************************************************************************
+                else if(this->roboDiff[0][0] == 0 && this->roboDiff[1][0] == 0)
+                {
+                    std::cout << "THREE OF A KIND" << std::endl;
+                    this->roboPoints1=4;
+                }
+                else if(this->roboDiff[1][0] == 0 && this->roboDiff[2][0] == 0)
+                {
+                    std::cout << "THREE OF A KIND" << std::endl;
+                    this->roboPoints1=4;
+                }
+                else if(this->roboDiff[2][0] == 0 && this->roboDiff[3][0] == 0)
+                {
+                    std::cout << "THREE OF A KIND" << std::endl;
+                    this->roboPoints1=4;
+                } 
+                else if(this->roboDiff[3][0] == 0 && this->roboDiff[4][0] == 0)
+                {
+                    std::cout << "THREE OF A KIND" << std::endl;
+                    this->roboPoints1=4;
+                } 
+                else if(this->roboDiff[4][0] == 0 && this->roboDiff[5][0] == 0)
+                {
+                    std::cout << "THREE OF A KIND" << std::endl;
+                    this->roboPoints1=4;
+                } 
+               // ************************************************************************
+               // ************************************************************************
+               //                      2 PAIRS
+               // ************************************************************************
+               // ************************************************************************ 
+                else if(this->roboDiff[0][0] == 0 && this->roboDiff[2][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[0][0] == 0 && this->roboDiff[3][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[0][0] == 0 && this->roboDiff[4][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[0][0] == 0 && this->roboDiff[5][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[1][0] == 0 && this->roboDiff[3][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[1][0] == 0 && this->roboDiff[4][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[1][0] == 0 && this->roboDiff[5][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[2][0] == 0 && this->roboDiff[0][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[2][0] == 0 && this->roboDiff[4][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[2][0] == 0 && this->roboDiff[5][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[3][0] == 0 && this->roboDiff[0][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[3][0] == 0 && this->roboDiff[1][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[3][0] == 0 && this->roboDiff[5][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[4][0] == 0 && this->roboDiff[0][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[4][0] == 0 && this->roboDiff[1][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[4][0] == 0 && this->roboDiff[2][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[5][0] == 0 && this->roboDiff[0][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[5][0] == 0 && this->roboDiff[1][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[5][0] == 0 && this->roboDiff[2][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[5][0] == 0 && this->roboDiff[3][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+               // ************************************************************************
+               // ************************************************************************
+               //                      1 PAIR
+               // ************************************************************************
+               // ************************************************************************ 
+                else if(this->roboDiff[0][0] == 0)
+                {
+                    std::cout << "ONE PAIR!" << std::endl;
+                    this->roboPoints1=2;
+                }
+                else if(this->roboDiff[1][0] == 0)
+                {
+                    std::cout << "ONE PAIR!" << std::endl;
+                    this->roboPoints1=2;
+                }
+                else if(this->roboDiff[2][0] == 0)
+                {
+                    std::cout << "ONE PAIR!" << std::endl;
+                    this->roboPoints1=2;
+                }
+                else if(this->roboDiff[3][0] == 0)
+                {
+                    std::cout << "ONE PAIR!" << std::endl;
+                    this->roboPoints1=2;
+                }
+                else if(this->roboDiff[4][0] == 0)
+                {
+                    std::cout << "ONE PAIR!" << std::endl;
+                    this->roboPoints1=2;
+                }
+                else if(this->roboDiff[5][0] == 0)
+                {
+                    std::cout << "ONE PAIR!" << std::endl;
+                    this->roboPoints1=2;
+                }
+                // ************************************************************************
+               // ************************************************************************
+               //                      ELSE HIGHEST CARD
+               // ************************************************************************
+               // ************************************************************************ 
+                else
+                {
+                 std::cout << "HIGHEST CARD: " << this->roboCardNumber[0][0] << std::endl;
+                 this->roboPoints1=1;
+                }
+                break;
+            }
+        case 2:
+        {
+                // ************************************************************************
+                // ************************************************************************
+                //                      ROYAL FLUSH
+                // ************************************************************************
+                // ************************************************************************
+                // ROYAL FLUSH: 10 through ACE -- HEARTS
+                if(this->roboHeartsCount1 == 5 && this->roboCardNumber[0][0] == 13 &&
+                   this->roboCardNumber[1][0] == 12 && this->roboCardNumber[2][0] == 11 &&
+                   this->roboCardNumber[3][0] == 10 && this->roboCardNumber[7][0] == 1)
+                {
+                    std::cout << "ROYAL FLUSH of HEARTS" << std::endl;
+                    this->roboPoints1=10;
+                }
+                // ROYAL FLUSH: 10 through ACE -- CLUBS
+                else if(this->roboClubsCount1 == 5 && this->roboCardNumber[0][0] == 13 &&
+                   this->roboCardNumber[1][0] == 12 && this->roboCardNumber[2][0] == 11 &&
+                   this->roboCardNumber[3][0] == 10 && this->roboCardNumber[7][0] == 1)
+                {
+                    std::cout << "ROYAL FLUSH of CLUBS" << std::endl;
+                    this->roboPoints1=10;
+                }    
+                // ROYAL FLUSH: 10 through ACE -- SPADES
+                else if(this->roboSpadesCount1 == 5 && this->roboCardNumber[0][0] == 13 &&
+                   this->roboCardNumber[1][0] == 12 && this->roboCardNumber[2][0] == 11 &&
+                   this->roboCardNumber[3][0] == 10 && this->roboCardNumber[7][0] == 1)
+                {
+                    std::cout << "ROYAL FLUSH of SPADES" << std::endl;
+                    this->roboPoints1=10;
+                }     
+                // ROYAL FLUSH: 10 through ACE -- DIAMONDS
+                else if(this->roboDiamondsCount1 == 5 && this->cardNumber[0][0] == 13 &&
+                   this->roboCardNumber[1][0] == 12 && this->roboCardNumber[2][0] == 11 &&
+                   this->roboCardNumber[3][0] == 10 && this->roboCardNumber[7][0] == 1)
+                {
+                    std::cout << "ROYAL FLUSH of DIAMONDS" << std::endl;
+                    this->roboPoints1=10;
+                }       
+                // ************************************************************************
+                // ************************************************************************
+                //                      STRAIGHT FLUSH
+                // ************************************************************************
+                // ************************************************************************    
+                // STRAIGHT FLUSH: ANY SEQUENCE OF FIVE CARDS + SAME SUITS 
+                else if(this->roboHeartsCount1 == 5 && this->roboDiff[0][0] == 1 &&
+                   this->roboDiff[1][0] == 1 && this->roboDiff[2][0] == 1 &&
+                   this->roboDiff[3][0] == 1 && this->roboDiff[4][0] == 1)
+                {
+                    std::cout << "STRAIGHT FLUSH of HEARTS" << std::endl;
+                    this->roboPoints1=9;
+                }
+
+                else if(this->roboHeartsCount1 == 5 && this->roboDiff[1][0] == 1 &&
+                   this->roboDiff[2][0] == 1 && this->roboDiff[3][0] == 1 &&
+                   this->roboDiff[4][0] == 1 && this->roboDiff[5][0] == 1)
+                {
+                    std::cout << "STRAIGHT FLUSH of HEARTS" << std::endl;
+                    this->roboPoints1=9;
+                }
+                else if(this->roboClubsCount1 == 5 && this->roboDiff[0][0] == 1 &&
+                   this->roboDiff[1][0] == 1 && this->roboDiff[2][0] == 1 &&
+                   this->roboDiff[3][0] == 1 && this->roboDiff[4][0] == 1)
+                {
+                    std::cout << "STRAIGHT FLUSH of CLUBS" << std::endl;
+                    this->roboPoints1=9;
+                }
+
+                else if(this->roboClubsCount1 == 5 && this->roboDiff[1][0] == 1 &&
+                   this->roboDiff[2][0] == 1 && this->roboDiff[3][0] == 1 &&
+                   this->roboDiff[4][0] == 1 && this->roboDiff[5][0] == 1)
+                {
+                    std::cout << "STRAIGHT FLUSH of CLUBS" << std::endl;
+                    this->roboPoints1=9;
+                }
+                else if(this->roboSpadesCount1 == 5 && this->roboDiff[0][0] == 1 &&
+                   this->roboDiff[1][0] == 1 && this->roboDiff[2][0] == 1 &&
+                   this->roboDiff[3][0] == 1 && this->roboDiff[4][0] == 1)
+                {
+                    std::cout << "STRAIGHT FLUSH of SPADES" << std::endl;
+                    this->roboPoints1=9;
+                }
+
+                else if(this->roboSpadesCount1 == 5 && this->roboDiff[1][0] == 1 &&
+                   this->roboDiff[2][0] == 1 && this->roboDiff[3][0] == 1 &&
+                   this->roboDiff[4][0] == 1 && this->roboDiff[5][0] == 1)
+                {
+                    std::cout << "STRAIGHT FLUSH of SPADES" << std::endl;
+                    this->roboPoints1=9;
+                }
+                else if(this->roboDiamondsCount1 == 5 && this->roboDiff[0][0] == 1 &&
+                   this->roboDiff[1][0] == 1 && this->roboDiff[2][0] == 1 &&
+                   this->roboDiff[3][0] == 1 && this->roboDiff[4][0] == 1)
+                {
+                    std::cout << "STRAIGHT FLUSH of DIAMONDS" << std::endl;
+                    this->roboPoints1=9;
+                }
+
+                else if(this->roboDiamondsCount1 == 5 && this->roboDiff[1][0] == 1 &&
+                   this->roboDiff[2][0] == 1 && this->roboDiff[3][0] == 1 &&
+                   this->roboDiff[4][0] == 1 && this->roboDiff[5][0] == 1)
+                {
+                    std::cout << "STRAIGHT FLUSH of DIAMONDS" << std::endl;
+                    this->roboPoints1=9;
+                }       
+                // ************************************************************************
+                // ************************************************************************
+                //                      FOUR OF A KIND
+                // ************************************************************************
+                // ************************************************************************    
+                else if(this->roboDiff[0][0] == 0 && this->roboDiff[1][0] ==0 && 
+                        this->roboDiff[2][0] ==0 && this->roboDiff[3][0] == 0)
+                {
+                    std::cout << "FOUR OF A KIND!" << std::endl;
+                    this->roboPoints1=8;
+                }
+                else if(this->roboDiff[1][0] == 0 && this->roboDiff[2][0] ==0 && 
+                        this->roboDiff[3][0] ==0 && this->roboDiff[4][0] == 0)
+                {
+                    std::cout << "FOUR OF A KIND!" << std::endl;
+                    this->roboPoints1=8;
+                }
+                else if(this->roboDiff[2][0] == 0 && this->roboDiff[3][0] ==0 && 
+                        this->roboDiff[4][0] ==0 && this->roboDiff[5][0] == 0)
+                {
+                    std::cout << "FOUR OF A KIND!" << std::endl;
+                    this->roboPoints1=8;
+                }
+                // ************************************************************************
+                // ************************************************************************
+                //                      FULL HOUSE
+                // ************************************************************************
+                // ************************************************************************  
+                 else if(this->roboDiff[0][0] == 0 && this->roboDiff[2][0] ==0 && this->roboDiff[3][0] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints1=7;
+                }
+                else if(this->roboDiff[0][0] == 0 && this->roboDiff[3][0] ==0 && this->roboDiff[4][0] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints1=7;
+                }
+                else if(this->roboDiff[0][0] == 0 && this->roboDiff[4][0] ==0 && this->roboDiff[5][0] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints1=7;
+                }
+                else if(this->roboDiff[1][0] == 0 && this->roboDiff[3][0] ==0 && this->roboDiff[4][0] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints1=7;
+                }
+                else if(this->roboDiff[1][0] == 0 && this->roboDiff[4][0] ==0 && this->roboDiff[5][0] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints1=7;
+                }
+                else if(this->roboDiff[2][0] == 0 && this->roboDiff[4][0] ==0 && this->roboDiff[5][0] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints1=7;
+                }
+                else if(this->roboDiff[3][0] == 0 && this->roboDiff[0][0] ==0 && this->roboDiff[1][0] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints1=7;
+                }
+                else if(this->roboDiff[4][0] == 0 && this->roboDiff[0][0] ==0 && this->roboDiff[1][0] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints1=7;
+                }
+                else if(this->roboDiff[4][0] == 0 && this->roboDiff[1][0] ==0 && this->roboDiff[2][0] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints1=7;
+                }
+                else if(this->roboDiff[5][0] == 0 && this->roboDiff[0][0] ==0 && this->roboDiff[1][0] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints1=7;
+                }
+                else if(this->roboDiff[5][0] == 0 && this->roboDiff[1][0] ==0 && this->roboDiff[2][0] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints1=7;
+                }
+                else if(this->roboDiff[5][0] == 0 && this->roboDiff[2][0] ==0 && this->roboDiff[3][0] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints1=7;
+                }
+                // ************************************************************************
+                // ************************************************************************
+                //                      FLUSH
+                // ************************************************************************
+                // ************************************************************************  
+                else if(this->roboHeartsCount1 == 5)
+                {
+                    std::cout << "FLUSH OF HEARTS" <<std::endl;
+                    this->roboPoints1=6;
+                }
+                else if(this->roboSpadesCount1 == 5)
+                {
+                    std::cout << "FLUSH OF SPADES" << std::endl;
+                    this->roboPoints1=6;
+                }
+                else if(this->roboDiamondsCount1 == 5)
+                {
+                    std::cout << "FLUSH OF DIAMONDS" << std::endl;
+                    this->roboPoints1=6;
+                }
+                else if(this->roboClubsCount1 == 5)
+                {
+                    std::cout << "FLUSH OF CLUBS" << std::endl;
+                    this->roboPoints1=6;
+                }
+               // ************************************************************************
+               // ************************************************************************
+               //                      STRAIGHT
+               // ************************************************************************
+               // ************************************************************************   
+                else if(this->roboDiff[0][0] == 1 && this->roboDiff[1][0] == 1 && this->roboDiff[2][0] == 1 &&
+                        this->roboDiff[3][0] == 1 && this->roboDiff[4][0] == 1)
+                {
+                    std::cout << "STRAIGHT" << std::endl;
+                    this->roboPoints1=5;
+                }
+                else if(this->roboDiff[1][0] == 1 && this->roboDiff[2][0] == 1 && this->roboDiff[3][0] == 1 &&
+                        this->roboDiff[4][0] == 1 && this->roboDiff[5][0] == 1)
+                {
+                    std::cout << "STRAIGHT" << std::endl;
+                    this->roboPoints1=5;
+                }
+               // ************************************************************************
+               // ************************************************************************
+               //                      3 of a KIND
+               // ************************************************************************
+               // ************************************************************************
+                else if(this->roboDiff[0][0] == 0 && this->roboDiff[1][0] == 0)
+                {
+                    std::cout << "THREE OF A KIND" << std::endl;
+                    this->roboPoints1=4;
+                }
+                else if(this->roboDiff[1][0] == 0 && this->roboDiff[2][0] == 0)
+                {
+                    std::cout << "THREE OF A KIND" << std::endl;
+                    this->roboPoints1=4;
+                }
+                else if(this->roboDiff[2][0] == 0 && this->roboDiff[3][0] == 0)
+                {
+                    std::cout << "THREE OF A KIND" << std::endl;
+                    this->roboPoints1=4;
+                } 
+                else if(this->roboDiff[3][0] == 0 && this->roboDiff[4][0] == 0)
+                {
+                    std::cout << "THREE OF A KIND" << std::endl;
+                    this->roboPoints1=4;
+                } 
+                else if(this->roboDiff[4][0] == 0 && this->roboDiff[5][0] == 0)
+                {
+                    std::cout << "THREE OF A KIND" << std::endl;
+                    this->roboPoints1=4;
+                } 
+               // ************************************************************************
+               // ************************************************************************
+               //                      2 PAIRS
+               // ************************************************************************
+               // ************************************************************************ 
+                else if(this->roboDiff[0][0] == 0 && this->roboDiff[2][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[0][0] == 0 && this->roboDiff[3][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[0][0] == 0 && this->roboDiff[4][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[0][0] == 0 && this->roboDiff[5][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[1][0] == 0 && this->roboDiff[3][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[1][0] == 0 && this->roboDiff[4][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[1][0] == 0 && this->roboDiff[5][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[2][0] == 0 && this->roboDiff[0][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[2][0] == 0 && this->roboDiff[4][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[2][0] == 0 && this->roboDiff[5][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[3][0] == 0 && this->roboDiff[0][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[3][0] == 0 && this->roboDiff[1][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[3][0] == 0 && this->roboDiff[5][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[4][0] == 0 && this->roboDiff[0][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[4][0] == 0 && this->roboDiff[1][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[4][0] == 0 && this->roboDiff[2][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[5][0] == 0 && this->roboDiff[0][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[5][0] == 0 && this->roboDiff[1][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[5][0] == 0 && this->roboDiff[2][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[5][0] == 0 && this->roboDiff[3][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+               // ************************************************************************
+               // ************************************************************************
+               //                      1 PAIR
+               // ************************************************************************
+               // ************************************************************************ 
+                else if(this->roboDiff[0][0] == 0)
+                {
+                    std::cout << "ONE PAIR!" << std::endl;
+                    this->roboPoints1=2;
+                }
+                else if(this->roboDiff[1][0] == 0)
+                {
+                    std::cout << "ONE PAIR!" << std::endl;
+                    this->roboPoints1=2;
+                }
+                else if(this->roboDiff[2][0] == 0)
+                {
+                    std::cout << "ONE PAIR!" << std::endl;
+                    this->roboPoints1=2;
+                }
+                else if(this->roboDiff[3][0] == 0)
+                {
+                    std::cout << "ONE PAIR!" << std::endl;
+                    this->roboPoints1=2;
+                }
+                else if(this->roboDiff[4][0] == 0)
+                {
+                    std::cout << "ONE PAIR!" << std::endl;
+                    this->roboPoints1=2;
+                }
+                else if(this->roboDiff[5][0] == 0)
+                {
+                    std::cout << "ONE PAIR!" << std::endl;
+                    this->roboPoints1=2;
+                }
+                // ************************************************************************
+               // ************************************************************************
+               //                      ELSE HIGHEST CARD
+               // ************************************************************************
+               // ************************************************************************ 
+                else
+                {
+                 std::cout << "HIGHEST CARD: " << this->roboCardNumber[0][0] << std::endl;
+                 this->roboPoints1=1;
+                }
+// ****************************************************************************************
+// ****************************************************************************************
+// ****************************************************************************************
+// ****************************************************************************************
+// ****************************************************************************************                
+                
+                // ************************************************************************
+                // ************************************************************************
+                //                      ROYAL FLUSH
+                // ************************************************************************
+                // ************************************************************************
+                // ROYAL FLUSH: 10 through ACE -- HEARTS
+                if(this->roboHeartsCount2== 5 && this->roboCardNumber[0][1] == 13 &&
+                   this->roboCardNumber[1][1] == 12 && this->roboCardNumber[2][1] == 11 &&
+                   this->roboCardNumber[3][1] == 10 && this->roboCardNumber[7][1] == 1)
+                {
+                    std::cout << "ROYAL FLUSH of HEARTS" << std::endl;
+                    this->roboPoints2=10;
+                }
+                // ROYAL FLUSH: 10 through ACE -- CLUBS
+                else if(this->roboClubsCount2== 5 && this->roboCardNumber[0][1] == 13 &&
+                   this->roboCardNumber[1][1] == 12 && this->roboCardNumber[2][1] == 11 &&
+                   this->roboCardNumber[3][1] == 10 && this->roboCardNumber[7][1] == 1)
+                {
+                    std::cout << "ROYAL FLUSH of CLUBS" << std::endl;
+                    this->roboPoints2=10;
+                }    
+                // ROYAL FLUSH: 10 through ACE -- SPADES
+                else if(this->roboSpadesCount2== 5 && this->roboCardNumber[0][1] == 13 &&
+                   this->roboCardNumber[1][1] == 12 && this->roboCardNumber[2][1] == 11 &&
+                   this->roboCardNumber[3][1] == 10 && this->roboCardNumber[7][1] == 1)
+                {
+                    std::cout << "ROYAL FLUSH of SPADES" << std::endl;
+                    this->roboPoints2=10;
+                }     
+                // ROYAL FLUSH: 10 through ACE -- DIAMONDS
+                else if(this->roboDiamondsCount2== 5 && this->cardNumber[0][1] == 13 &&
+                   this->roboCardNumber[1][1] == 12 && this->roboCardNumber[2][1] == 11 &&
+                   this->roboCardNumber[3][1] == 10 && this->roboCardNumber[7][1] == 1)
+                {
+                    std::cout << "ROYAL FLUSH of DIAMONDS" << std::endl;
+                    this->roboPoints2=10;
+                }       
+                // ************************************************************************
+                // ************************************************************************
+                //                      STRAIGHT FLUSH
+                // ************************************************************************
+                // ************************************************************************    
+                // STRAIGHT FLUSH: ANY SEQUENCE OF FIVE CARDS + SAME SUITS 
+                else if(this->roboHeartsCount2== 5 && this->roboDiff[0][1] == 1 &&
+                   this->roboDiff[1][1] == 1 && this->roboDiff[2][1] == 1 &&
+                   this->roboDiff[3][1] == 1 && this->roboDiff[4][1] == 1)
+                {
+                    std::cout << "STRAIGHT FLUSH of HEARTS" << std::endl;
+                    this->roboPoints2=9;
+                }
+
+                else if(this->roboHeartsCount2== 5 && this->roboDiff[1][1] == 1 &&
+                   this->roboDiff[2][1] == 1 && this->roboDiff[3][1] == 1 &&
+                   this->roboDiff[4][1] == 1 && this->roboDiff[5][1] == 1)
+                {
+                    std::cout << "STRAIGHT FLUSH of HEARTS" << std::endl;
+                    this->roboPoints2=9;
+                }
+                else if(this->roboClubsCount2== 5 && this->roboDiff[0][1] == 1 &&
+                   this->roboDiff[1][1] == 1 && this->roboDiff[2][1] == 1 &&
+                   this->roboDiff[3][1] == 1 && this->roboDiff[4][1] == 1)
+                {
+                    std::cout << "STRAIGHT FLUSH of CLUBS" << std::endl;
+                    this->roboPoints2=9;
+                }
+
+                else if(this->roboClubsCount2== 5 && this->roboDiff[1][1] == 1 &&
+                   this->roboDiff[2][1] == 1 && this->roboDiff[3][1] == 1 &&
+                   this->roboDiff[4][1] == 1 && this->roboDiff[5][1] == 1)
+                {
+                    std::cout << "STRAIGHT FLUSH of CLUBS" << std::endl;
+                    this->roboPoints2=9;
+                }
+                else if(this->roboSpadesCount2== 5 && this->roboDiff[0][1] == 1 &&
+                   this->roboDiff[1][1] == 1 && this->roboDiff[2][1] == 1 &&
+                   this->roboDiff[3][1] == 1 && this->roboDiff[4][1] == 1)
+                {
+                    std::cout << "STRAIGHT FLUSH of SPADES" << std::endl;
+                    this->roboPoints2=9;
+                }
+
+                else if(this->roboSpadesCount2== 5 && this->roboDiff[1][1] == 1 &&
+                   this->roboDiff[2][1] == 1 && this->roboDiff[3][1] == 1 &&
+                   this->roboDiff[4][1] == 1 && this->roboDiff[5][1] == 1)
+                {
+                    std::cout << "STRAIGHT FLUSH of SPADES" << std::endl;
+                    this->roboPoints2=9;
+                }
+                else if(this->roboDiamondsCount2== 5 && this->roboDiff[0][1] == 1 &&
+                   this->roboDiff[1][1] == 1 && this->roboDiff[2][1] == 1 &&
+                   this->roboDiff[3][1] == 1 && this->roboDiff[4][1] == 1)
+                {
+                    std::cout << "STRAIGHT FLUSH of DIAMONDS" << std::endl;
+                    this->roboPoints2=9;
+                }
+
+                else if(this->roboDiamondsCount2== 5 && this->roboDiff[1][1] == 1 &&
+                   this->roboDiff[2][1] == 1 && this->roboDiff[3][1] == 1 &&
+                   this->roboDiff[4][1] == 1 && this->roboDiff[5][1] == 1)
+                {
+                    std::cout << "STRAIGHT FLUSH of DIAMONDS" << std::endl;
+                    this->roboPoints2=9;
+                }       
+                // ************************************************************************
+                // ************************************************************************
+                //                      FOUR OF A KIND
+                // ************************************************************************
+                // ************************************************************************    
+                else if(this->roboDiff[0][1] == 0 && this->roboDiff[1][1] ==0 && 
+                        this->roboDiff[2][1] ==0 && this->roboDiff[3][1] == 0)
+                {
+                    std::cout << "FOUR OF A KIND!" << std::endl;
+                    this->roboPoints2=8;
+                }
+                else if(this->roboDiff[1][1] == 0 && this->roboDiff[2][1] ==0 && 
+                        this->roboDiff[3][1] ==0 && this->roboDiff[4][1] == 0)
+                {
+                    std::cout << "FOUR OF A KIND!" << std::endl;
+                    this->roboPoints2=8;
+                }
+                else if(this->roboDiff[2][1] == 0 && this->roboDiff[3][1] ==0 && 
+                        this->roboDiff[4][1] ==0 && this->roboDiff[5][1] == 0)
+                {
+                    std::cout << "FOUR OF A KIND!" << std::endl;
+                    this->roboPoints2=8;
+                }
+                // ************************************************************************
+                // ************************************************************************
+                //                      FULL HOUSE
+                // ************************************************************************
+                // ************************************************************************  
+                 else if(this->roboDiff[0][1] == 0 && this->roboDiff[2][1] ==0 && this->roboDiff[3][1] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints2=7;
+                }
+                else if(this->roboDiff[0][1] == 0 && this->roboDiff[3][1] ==0 && this->roboDiff[4][1] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints2=7;
+                }
+                else if(this->roboDiff[0][1] == 0 && this->roboDiff[4][1] ==0 && this->roboDiff[5][1] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints2=7;
+                }
+                else if(this->roboDiff[1][1] == 0 && this->roboDiff[3][1] ==0 && this->roboDiff[4][1] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints2=7;
+                }
+                else if(this->roboDiff[1][1] == 0 && this->roboDiff[4][1] ==0 && this->roboDiff[5][1] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints2=7;
+                }
+                else if(this->roboDiff[2][1] == 0 && this->roboDiff[4][1] ==0 && this->roboDiff[5][1] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints2=7;
+                }
+                else if(this->roboDiff[3][1] == 0 && this->roboDiff[0][1] ==0 && this->roboDiff[1][1] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints2=7;
+                }
+                else if(this->roboDiff[4][1] == 0 && this->roboDiff[0][1] ==0 && this->roboDiff[1][1] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints2=7;
+                }
+                else if(this->roboDiff[4][1] == 0 && this->roboDiff[1][1] ==0 && this->roboDiff[2][1] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints2=7;
+                }
+                else if(this->roboDiff[5][1] == 0 && this->roboDiff[0][1] ==0 && this->roboDiff[1][1] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints2=7;
+                }
+                else if(this->roboDiff[5][1] == 0 && this->roboDiff[1][1] ==0 && this->roboDiff[2][1] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints2=7;
+                }
+                else if(this->roboDiff[5][1] == 0 && this->roboDiff[2][1] ==0 && this->roboDiff[3][1] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints2=7;
+                }
+                // ************************************************************************
+                // ************************************************************************
+                //                      FLUSH
+                // ************************************************************************
+                // ************************************************************************  
+                else if(this->roboHeartsCount2== 5)
+                {
+                    std::cout << "FLUSH OF HEARTS" <<std::endl;
+                    this->roboPoints2=6;
+                }
+                else if(this->roboSpadesCount2== 5)
+                {
+                    std::cout << "FLUSH OF SPADES" << std::endl;
+                    this->roboPoints2=6;
+                }
+                else if(this->roboDiamondsCount2== 5)
+                {
+                    std::cout << "FLUSH OF DIAMONDS" << std::endl;
+                    this->roboPoints2=6;
+                }
+                else if(this->roboClubsCount2== 5)
+                {
+                    std::cout << "FLUSH OF CLUBS" << std::endl;
+                    this->roboPoints2=6;
+                }
+               // ************************************************************************
+               // ************************************************************************
+               //                      STRAIGHT
+               // ************************************************************************
+               // ************************************************************************   
+                else if(this->roboDiff[0][1] == 1 && this->roboDiff[1][1] == 1 && this->roboDiff[2][1] == 1 &&
+                        this->roboDiff[3][1] == 1 && this->roboDiff[4][1] == 1)
+                {
+                    std::cout << "STRAIGHT" << std::endl;
+                    this->roboPoints2=5;
+                }
+                else if(this->roboDiff[1][1] == 1 && this->roboDiff[2][1] == 1 && this->roboDiff[3][1] == 1 &&
+                        this->roboDiff[4][1] == 1 && this->roboDiff[5][1] == 1)
+                {
+                    std::cout << "STRAIGHT" << std::endl;
+                    this->roboPoints2=5;
+                }
+               // ************************************************************************
+               // ************************************************************************
+               //                      3 of a KIND
+               // ************************************************************************
+               // ************************************************************************
+                else if(this->roboDiff[0][1] == 0 && this->roboDiff[1][1] == 0)
+                {
+                    std::cout << "THREE OF A KIND" << std::endl;
+                    this->roboPoints2=4;
+                }
+                else if(this->roboDiff[1][1] == 0 && this->roboDiff[2][1] == 0)
+                {
+                    std::cout << "THREE OF A KIND" << std::endl;
+                    this->roboPoints2=4;
+                }
+                else if(this->roboDiff[2][1] == 0 && this->roboDiff[3][1] == 0)
+                {
+                    std::cout << "THREE OF A KIND" << std::endl;
+                    this->roboPoints2=4;
+                } 
+                else if(this->roboDiff[3][1] == 0 && this->roboDiff[4][1] == 0)
+                {
+                    std::cout << "THREE OF A KIND" << std::endl;
+                    this->roboPoints2=4;
+                } 
+                else if(this->roboDiff[4][1] == 0 && this->roboDiff[5][1] == 0)
+                {
+                    std::cout << "THREE OF A KIND" << std::endl;
+                    this->roboPoints2=4;
+                } 
+               // ************************************************************************
+               // ************************************************************************
+               //                      2 PAIRS
+               // ************************************************************************
+               // ************************************************************************ 
+                else if(this->roboDiff[0][1] == 0 && this->roboDiff[2][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints2=3;
+                }
+                else if(this->roboDiff[0][1] == 0 && this->roboDiff[3][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints2=3;
+                }
+                else if(this->roboDiff[0][1] == 0 && this->roboDiff[4][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints2=3;
+                }
+                else if(this->roboDiff[0][1] == 0 && this->roboDiff[5][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints2=3;
+                }
+                else if(this->roboDiff[1][1] == 0 && this->roboDiff[3][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints2=3;
+                }
+                else if(this->roboDiff[1][1] == 0 && this->roboDiff[4][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints2=3;
+                }
+                else if(this->roboDiff[1][1] == 0 && this->roboDiff[5][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints2=3;
+                }
+                else if(this->roboDiff[2][1] == 0 && this->roboDiff[0][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints2=3;
+                }
+                else if(this->roboDiff[2][1] == 0 && this->roboDiff[4][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints2=3;
+                }
+                else if(this->roboDiff[2][1] == 0 && this->roboDiff[5][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints2=3;
+                }
+                else if(this->roboDiff[3][1] == 0 && this->roboDiff[0][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints2=3;
+                }
+                else if(this->roboDiff[3][1] == 0 && this->roboDiff[1][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints2=3;
+                }
+                else if(this->roboDiff[3][1] == 0 && this->roboDiff[5][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints2=3;
+                }
+                else if(this->roboDiff[4][1] == 0 && this->roboDiff[0][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints2=3;
+                }
+                else if(this->roboDiff[4][1] == 0 && this->roboDiff[1][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints2=3;
+                }
+                else if(this->roboDiff[4][1] == 0 && this->roboDiff[2][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints2=3;
+                }
+                else if(this->roboDiff[5][1] == 0 && this->roboDiff[0][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints2=3;
+                }
+                else if(this->roboDiff[5][1] == 0 && this->roboDiff[1][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints2=3;
+                }
+                else if(this->roboDiff[5][1] == 0 && this->roboDiff[2][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints2=3;
+                }
+                else if(this->roboDiff[5][1] == 0 && this->roboDiff[3][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints2=3;
+                }
+               // ************************************************************************
+               // ************************************************************************
+               //                      1 PAIR
+               // ************************************************************************
+               // ************************************************************************ 
+                else if(this->roboDiff[0][1] == 0)
+                {
+                    std::cout << "ONE PAIR!" << std::endl;
+                    this->roboPoints2=2;
+                }
+                else if(this->roboDiff[1][1] == 0)
+                {
+                    std::cout << "ONE PAIR!" << std::endl;
+                    this->roboPoints2=2;
+                }
+                else if(this->roboDiff[2][1] == 0)
+                {
+                    std::cout << "ONE PAIR!" << std::endl;
+                    this->roboPoints2=2;
+                }
+                else if(this->roboDiff[3][1] == 0)
+                {
+                    std::cout << "ONE PAIR!" << std::endl;
+                    this->roboPoints2=2;
+                }
+                else if(this->roboDiff[4][1] == 0)
+                {
+                    std::cout << "ONE PAIR!" << std::endl;
+                    this->roboPoints2=2;
+                }
+                else if(this->roboDiff[5][1] == 0)
+                {
+                    std::cout << "ONE PAIR!" << std::endl;
+                    this->roboPoints2=2;
+                }
+                // ************************************************************************
+               // ************************************************************************
+               //                      ELSE HIGHEST CARD
+               // ************************************************************************
+               // ************************************************************************ 
+                else
+                {
+                 std::cout << "HIGHEST CARD: " << this->roboCardNumber[0][2] << std::endl;
+                 this->roboPoints2=1;
+                }
+                break;                
+        }
+        case 3:
+        {
+                // ************************************************************************
+                // ************************************************************************
+                //                      ROYAL FLUSH
+                // ************************************************************************
+                // ************************************************************************
+                // ROYAL FLUSH: 10 through ACE -- HEARTS
+                if(this->roboHeartsCount1 == 5 && this->roboCardNumber[0][0] == 13 &&
+                   this->roboCardNumber[1][0] == 12 && this->roboCardNumber[2][0] == 11 &&
+                   this->roboCardNumber[3][0] == 10 && this->roboCardNumber[7][0] == 1)
+                {
+                    std::cout << "ROYAL FLUSH of HEARTS" << std::endl;
+                    this->roboPoints1=10;
+                }
+                // ROYAL FLUSH: 10 through ACE -- CLUBS
+                else if(this->roboClubsCount1 == 5 && this->roboCardNumber[0][0] == 13 &&
+                   this->roboCardNumber[1][0] == 12 && this->roboCardNumber[2][0] == 11 &&
+                   this->roboCardNumber[3][0] == 10 && this->roboCardNumber[7][0] == 1)
+                {
+                    std::cout << "ROYAL FLUSH of CLUBS" << std::endl;
+                    this->roboPoints1=10;
+                }    
+                // ROYAL FLUSH: 10 through ACE -- SPADES
+                else if(this->roboSpadesCount1 == 5 && this->roboCardNumber[0][0] == 13 &&
+                   this->roboCardNumber[1][0] == 12 && this->roboCardNumber[2][0] == 11 &&
+                   this->roboCardNumber[3][0] == 10 && this->roboCardNumber[7][0] == 1)
+                {
+                    std::cout << "ROYAL FLUSH of SPADES" << std::endl;
+                    this->roboPoints1=10;
+                }     
+                // ROYAL FLUSH: 10 through ACE -- DIAMONDS
+                else if(this->roboDiamondsCount1 == 5 && this->cardNumber[0][0] == 13 &&
+                   this->roboCardNumber[1][0] == 12 && this->roboCardNumber[2][0] == 11 &&
+                   this->roboCardNumber[3][0] == 10 && this->roboCardNumber[7][0] == 1)
+                {
+                    std::cout << "ROYAL FLUSH of DIAMONDS" << std::endl;
+                    this->roboPoints1=10;
+                }       
+                // ************************************************************************
+                // ************************************************************************
+                //                      STRAIGHT FLUSH
+                // ************************************************************************
+                // ************************************************************************    
+                // STRAIGHT FLUSH: ANY SEQUENCE OF FIVE CARDS + SAME SUITS 
+                else if(this->roboHeartsCount1 == 5 && this->roboDiff[0][0] == 1 &&
+                   this->roboDiff[1][0] == 1 && this->roboDiff[2][0] == 1 &&
+                   this->roboDiff[3][0] == 1 && this->roboDiff[4][0] == 1)
+                {
+                    std::cout << "STRAIGHT FLUSH of HEARTS" << std::endl;
+                    this->roboPoints1=9;
+                }
+
+                else if(this->roboHeartsCount1 == 5 && this->roboDiff[1][0] == 1 &&
+                   this->roboDiff[2][0] == 1 && this->roboDiff[3][0] == 1 &&
+                   this->roboDiff[4][0] == 1 && this->roboDiff[5][0] == 1)
+                {
+                    std::cout << "STRAIGHT FLUSH of HEARTS" << std::endl;
+                    this->roboPoints1=9;
+                }
+                else if(this->roboClubsCount1 == 5 && this->roboDiff[0][0] == 1 &&
+                   this->roboDiff[1][0] == 1 && this->roboDiff[2][0] == 1 &&
+                   this->roboDiff[3][0] == 1 && this->roboDiff[4][0] == 1)
+                {
+                    std::cout << "STRAIGHT FLUSH of CLUBS" << std::endl;
+                    this->roboPoints1=9;
+                }
+
+                else if(this->roboClubsCount1 == 5 && this->roboDiff[1][0] == 1 &&
+                   this->roboDiff[2][0] == 1 && this->roboDiff[3][0] == 1 &&
+                   this->roboDiff[4][0] == 1 && this->roboDiff[5][0] == 1)
+                {
+                    std::cout << "STRAIGHT FLUSH of CLUBS" << std::endl;
+                    this->roboPoints1=9;
+                }
+                else if(this->roboSpadesCount1 == 5 && this->roboDiff[0][0] == 1 &&
+                   this->roboDiff[1][0] == 1 && this->roboDiff[2][0] == 1 &&
+                   this->roboDiff[3][0] == 1 && this->roboDiff[4][0] == 1)
+                {
+                    std::cout << "STRAIGHT FLUSH of SPADES" << std::endl;
+                    this->roboPoints1=9;
+                }
+
+                else if(this->roboSpadesCount1 == 5 && this->roboDiff[1][0] == 1 &&
+                   this->roboDiff[2][0] == 1 && this->roboDiff[3][0] == 1 &&
+                   this->roboDiff[4][0] == 1 && this->roboDiff[5][0] == 1)
+                {
+                    std::cout << "STRAIGHT FLUSH of SPADES" << std::endl;
+                    this->roboPoints1=9;
+                }
+                else if(this->roboDiamondsCount1 == 5 && this->roboDiff[0][0] == 1 &&
+                   this->roboDiff[1][0] == 1 && this->roboDiff[2][0] == 1 &&
+                   this->roboDiff[3][0] == 1 && this->roboDiff[4][0] == 1)
+                {
+                    std::cout << "STRAIGHT FLUSH of DIAMONDS" << std::endl;
+                    this->roboPoints1=9;
+                }
+
+                else if(this->roboDiamondsCount1 == 5 && this->roboDiff[1][0] == 1 &&
+                   this->roboDiff[2][0] == 1 && this->roboDiff[3][0] == 1 &&
+                   this->roboDiff[4][0] == 1 && this->roboDiff[5][0] == 1)
+                {
+                    std::cout << "STRAIGHT FLUSH of DIAMONDS" << std::endl;
+                    this->roboPoints1=9;
+                }       
+                // ************************************************************************
+                // ************************************************************************
+                //                      FOUR OF A KIND
+                // ************************************************************************
+                // ************************************************************************    
+                else if(this->roboDiff[0][0] == 0 && this->roboDiff[1][0] ==0 && 
+                        this->roboDiff[2][0] ==0 && this->roboDiff[3][0] == 0)
+                {
+                    std::cout << "FOUR OF A KIND!" << std::endl;
+                    this->roboPoints1=8;
+                }
+                else if(this->roboDiff[1][0] == 0 && this->roboDiff[2][0] ==0 && 
+                        this->roboDiff[3][0] ==0 && this->roboDiff[4][0] == 0)
+                {
+                    std::cout << "FOUR OF A KIND!" << std::endl;
+                    this->roboPoints1=8;
+                }
+                else if(this->roboDiff[2][0] == 0 && this->roboDiff[3][0] ==0 && 
+                        this->roboDiff[4][0] ==0 && this->roboDiff[5][0] == 0)
+                {
+                    std::cout << "FOUR OF A KIND!" << std::endl;
+                    this->roboPoints1=8;
+                }
+                // ************************************************************************
+                // ************************************************************************
+                //                      FULL HOUSE
+                // ************************************************************************
+                // ************************************************************************  
+                 else if(this->roboDiff[0][0] == 0 && this->roboDiff[2][0] ==0 && this->roboDiff[3][0] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints1=7;
+                }
+                else if(this->roboDiff[0][0] == 0 && this->roboDiff[3][0] ==0 && this->roboDiff[4][0] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints1=7;
+                }
+                else if(this->roboDiff[0][0] == 0 && this->roboDiff[4][0] ==0 && this->roboDiff[5][0] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints1=7;
+                }
+                else if(this->roboDiff[1][0] == 0 && this->roboDiff[3][0] ==0 && this->roboDiff[4][0] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints1=7;
+                }
+                else if(this->roboDiff[1][0] == 0 && this->roboDiff[4][0] ==0 && this->roboDiff[5][0] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints1=7;
+                }
+                else if(this->roboDiff[2][0] == 0 && this->roboDiff[4][0] ==0 && this->roboDiff[5][0] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints1=7;
+                }
+                else if(this->roboDiff[3][0] == 0 && this->roboDiff[0][0] ==0 && this->roboDiff[1][0] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints1=7;
+                }
+                else if(this->roboDiff[4][0] == 0 && this->roboDiff[0][0] ==0 && this->roboDiff[1][0] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints1=7;
+                }
+                else if(this->roboDiff[4][0] == 0 && this->roboDiff[1][0] ==0 && this->roboDiff[2][0] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints1=7;
+                }
+                else if(this->roboDiff[5][0] == 0 && this->roboDiff[0][0] ==0 && this->roboDiff[1][0] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints1=7;
+                }
+                else if(this->roboDiff[5][0] == 0 && this->roboDiff[1][0] ==0 && this->roboDiff[2][0] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints1=7;
+                }
+                else if(this->roboDiff[5][0] == 0 && this->roboDiff[2][0] ==0 && this->roboDiff[3][0] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints1=7;
+                }
+                // ************************************************************************
+                // ************************************************************************
+                //                      FLUSH
+                // ************************************************************************
+                // ************************************************************************  
+                else if(this->roboHeartsCount1 == 5)
+                {
+                    std::cout << "FLUSH OF HEARTS" <<std::endl;
+                    this->roboPoints1=6;
+                }
+                else if(this->roboSpadesCount1 == 5)
+                {
+                    std::cout << "FLUSH OF SPADES" << std::endl;
+                    this->roboPoints1=6;
+                }
+                else if(this->roboDiamondsCount1 == 5)
+                {
+                    std::cout << "FLUSH OF DIAMONDS" << std::endl;
+                    this->roboPoints1=6;
+                }
+                else if(this->roboClubsCount1 == 5)
+                {
+                    std::cout << "FLUSH OF CLUBS" << std::endl;
+                    this->roboPoints1=6;
+                }
+               // ************************************************************************
+               // ************************************************************************
+               //                      STRAIGHT
+               // ************************************************************************
+               // ************************************************************************   
+                else if(this->roboDiff[0][0] == 1 && this->roboDiff[1][0] == 1 && this->roboDiff[2][0] == 1 &&
+                        this->roboDiff[3][0] == 1 && this->roboDiff[4][0] == 1)
+                {
+                    std::cout << "STRAIGHT" << std::endl;
+                    this->roboPoints1=5;
+                }
+                else if(this->roboDiff[1][0] == 1 && this->roboDiff[2][0] == 1 && this->roboDiff[3][0] == 1 &&
+                        this->roboDiff[4][0] == 1 && this->roboDiff[5][0] == 1)
+                {
+                    std::cout << "STRAIGHT" << std::endl;
+                    this->roboPoints1=5;
+                }
+               // ************************************************************************
+               // ************************************************************************
+               //                      3 of a KIND
+               // ************************************************************************
+               // ************************************************************************
+                else if(this->roboDiff[0][0] == 0 && this->roboDiff[1][0] == 0)
+                {
+                    std::cout << "THREE OF A KIND" << std::endl;
+                    this->roboPoints1=4;
+                }
+                else if(this->roboDiff[1][0] == 0 && this->roboDiff[2][0] == 0)
+                {
+                    std::cout << "THREE OF A KIND" << std::endl;
+                    this->roboPoints1=4;
+                }
+                else if(this->roboDiff[2][0] == 0 && this->roboDiff[3][0] == 0)
+                {
+                    std::cout << "THREE OF A KIND" << std::endl;
+                    this->roboPoints1=4;
+                } 
+                else if(this->roboDiff[3][0] == 0 && this->roboDiff[4][0] == 0)
+                {
+                    std::cout << "THREE OF A KIND" << std::endl;
+                    this->roboPoints1=4;
+                } 
+                else if(this->roboDiff[4][0] == 0 && this->roboDiff[5][0] == 0)
+                {
+                    std::cout << "THREE OF A KIND" << std::endl;
+                    this->roboPoints1=4;
+                } 
+               // ************************************************************************
+               // ************************************************************************
+               //                      2 PAIRS
+               // ************************************************************************
+               // ************************************************************************ 
+                else if(this->roboDiff[0][0] == 0 && this->roboDiff[2][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[0][0] == 0 && this->roboDiff[3][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[0][0] == 0 && this->roboDiff[4][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[0][0] == 0 && this->roboDiff[5][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[1][0] == 0 && this->roboDiff[3][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[1][0] == 0 && this->roboDiff[4][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[1][0] == 0 && this->roboDiff[5][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[2][0] == 0 && this->roboDiff[0][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[2][0] == 0 && this->roboDiff[4][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[2][0] == 0 && this->roboDiff[5][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[3][0] == 0 && this->roboDiff[0][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[3][0] == 0 && this->roboDiff[1][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[3][0] == 0 && this->roboDiff[5][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[4][0] == 0 && this->roboDiff[0][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[4][0] == 0 && this->roboDiff[1][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[4][0] == 0 && this->roboDiff[2][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[5][0] == 0 && this->roboDiff[0][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[5][0] == 0 && this->roboDiff[1][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[5][0] == 0 && this->roboDiff[2][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+                else if(this->roboDiff[5][0] == 0 && this->roboDiff[3][0]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints1=3;
+                }
+               // ************************************************************************
+               // ************************************************************************
+               //                      1 PAIR
+               // ************************************************************************
+               // ************************************************************************ 
+                else if(this->roboDiff[0][0] == 0)
+                {
+                    std::cout << "ONE PAIR!" << std::endl;
+                    this->roboPoints1=2;
+                }
+                else if(this->roboDiff[1][0] == 0)
+                {
+                    std::cout << "ONE PAIR!" << std::endl;
+                    this->roboPoints1=2;
+                }
+                else if(this->roboDiff[2][0] == 0)
+                {
+                    std::cout << "ONE PAIR!" << std::endl;
+                    this->roboPoints1=2;
+                }
+                else if(this->roboDiff[3][0] == 0)
+                {
+                    std::cout << "ONE PAIR!" << std::endl;
+                    this->roboPoints1=2;
+                }
+                else if(this->roboDiff[4][0] == 0)
+                {
+                    std::cout << "ONE PAIR!" << std::endl;
+                    this->roboPoints1=2;
+                }
+                else if(this->roboDiff[5][0] == 0)
+                {
+                    std::cout << "ONE PAIR!" << std::endl;
+                    this->roboPoints1=2;
+                }
+                // ************************************************************************
+               // ************************************************************************
+               //                      ELSE HIGHEST CARD
+               // ************************************************************************
+               // ************************************************************************ 
+                else
+                {
+                 std::cout << "HIGHEST CARD: " << this->roboCardNumber[0][0] << std::endl;
+                 this->roboPoints1=1;
+                }
+// ****************************************************************************************
+// ****************************************************************************************
+// ****************************************************************************************
+// ****************************************************************************************
+// ****************************************************************************************                
+                
+                // ************************************************************************
+                // ************************************************************************
+                //                      ROYAL FLUSH
+                // ************************************************************************
+                // ************************************************************************
+                // ROYAL FLUSH: 10 through ACE -- HEARTS
+                if(this->roboHeartsCount2== 5 && this->roboCardNumber[0][1] == 13 &&
+                   this->roboCardNumber[1][1] == 12 && this->roboCardNumber[2][1] == 11 &&
+                   this->roboCardNumber[3][1] == 10 && this->roboCardNumber[7][1] == 1)
+                {
+                    std::cout << "ROYAL FLUSH of HEARTS" << std::endl;
+                    this->roboPoints2=10;
+                }
+                // ROYAL FLUSH: 10 through ACE -- CLUBS
+                else if(this->roboClubsCount2== 5 && this->roboCardNumber[0][1] == 13 &&
+                   this->roboCardNumber[1][1] == 12 && this->roboCardNumber[2][1] == 11 &&
+                   this->roboCardNumber[3][1] == 10 && this->roboCardNumber[7][1] == 1)
+                {
+                    std::cout << "ROYAL FLUSH of CLUBS" << std::endl;
+                    this->roboPoints2=10;
+                }    
+                // ROYAL FLUSH: 10 through ACE -- SPADES
+                else if(this->roboSpadesCount2== 5 && this->roboCardNumber[0][1] == 13 &&
+                   this->roboCardNumber[1][1] == 12 && this->roboCardNumber[2][1] == 11 &&
+                   this->roboCardNumber[3][1] == 10 && this->roboCardNumber[7][1] == 1)
+                {
+                    std::cout << "ROYAL FLUSH of SPADES" << std::endl;
+                    this->roboPoints2=10;
+                }     
+                // ROYAL FLUSH: 10 through ACE -- DIAMONDS
+                else if(this->roboDiamondsCount2== 5 && this->cardNumber[0][1] == 13 &&
+                   this->roboCardNumber[1][1] == 12 && this->roboCardNumber[2][1] == 11 &&
+                   this->roboCardNumber[3][1] == 10 && this->roboCardNumber[7][1] == 1)
+                {
+                    std::cout << "ROYAL FLUSH of DIAMONDS" << std::endl;
+                    this->roboPoints2=10;
+                }       
+                // ************************************************************************
+                // ************************************************************************
+                //                      STRAIGHT FLUSH
+                // ************************************************************************
+                // ************************************************************************    
+                // STRAIGHT FLUSH: ANY SEQUENCE OF FIVE CARDS + SAME SUITS 
+                else if(this->roboHeartsCount2== 5 && this->roboDiff[0][1] == 1 &&
+                   this->roboDiff[1][1] == 1 && this->roboDiff[2][1] == 1 &&
+                   this->roboDiff[3][1] == 1 && this->roboDiff[4][1] == 1)
+                {
+                    std::cout << "STRAIGHT FLUSH of HEARTS" << std::endl;
+                    this->roboPoints2=9;
+                }
+
+                else if(this->roboHeartsCount2== 5 && this->roboDiff[1][1] == 1 &&
+                   this->roboDiff[2][1] == 1 && this->roboDiff[3][1] == 1 &&
+                   this->roboDiff[4][1] == 1 && this->roboDiff[5][1] == 1)
+                {
+                    std::cout << "STRAIGHT FLUSH of HEARTS" << std::endl;
+                    this->roboPoints2=9;
+                }
+                else if(this->roboClubsCount2== 5 && this->roboDiff[0][1] == 1 &&
+                   this->roboDiff[1][1] == 1 && this->roboDiff[2][1] == 1 &&
+                   this->roboDiff[3][1] == 1 && this->roboDiff[4][1] == 1)
+                {
+                    std::cout << "STRAIGHT FLUSH of CLUBS" << std::endl;
+                    this->roboPoints2=9;
+                }
+
+                else if(this->roboClubsCount2== 5 && this->roboDiff[1][1] == 1 &&
+                   this->roboDiff[2][1] == 1 && this->roboDiff[3][1] == 1 &&
+                   this->roboDiff[4][1] == 1 && this->roboDiff[5][1] == 1)
+                {
+                    std::cout << "STRAIGHT FLUSH of CLUBS" << std::endl;
+                    this->roboPoints2=9;
+                }
+                else if(this->roboSpadesCount2== 5 && this->roboDiff[0][1] == 1 &&
+                   this->roboDiff[1][1] == 1 && this->roboDiff[2][1] == 1 &&
+                   this->roboDiff[3][1] == 1 && this->roboDiff[4][1] == 1)
+                {
+                    std::cout << "STRAIGHT FLUSH of SPADES" << std::endl;
+                    this->roboPoints2=9;
+                }
+
+                else if(this->roboSpadesCount2== 5 && this->roboDiff[1][1] == 1 &&
+                   this->roboDiff[2][1] == 1 && this->roboDiff[3][1] == 1 &&
+                   this->roboDiff[4][1] == 1 && this->roboDiff[5][1] == 1)
+                {
+                    std::cout << "STRAIGHT FLUSH of SPADES" << std::endl;
+                    this->roboPoints2=9;
+                }
+                else if(this->roboDiamondsCount2== 5 && this->roboDiff[0][1] == 1 &&
+                   this->roboDiff[1][1] == 1 && this->roboDiff[2][1] == 1 &&
+                   this->roboDiff[3][1] == 1 && this->roboDiff[4][1] == 1)
+                {
+                    std::cout << "STRAIGHT FLUSH of DIAMONDS" << std::endl;
+                    this->roboPoints2=9;
+                }
+
+                else if(this->roboDiamondsCount2== 5 && this->roboDiff[1][1] == 1 &&
+                   this->roboDiff[2][1] == 1 && this->roboDiff[3][1] == 1 &&
+                   this->roboDiff[4][1] == 1 && this->roboDiff[5][1] == 1)
+                {
+                    std::cout << "STRAIGHT FLUSH of DIAMONDS" << std::endl;
+                    this->roboPoints2=9;
+                }       
+                // ************************************************************************
+                // ************************************************************************
+                //                      FOUR OF A KIND
+                // ************************************************************************
+                // ************************************************************************    
+                else if(this->roboDiff[0][1] == 0 && this->roboDiff[1][1] ==0 && 
+                        this->roboDiff[2][1] ==0 && this->roboDiff[3][1] == 0)
+                {
+                    std::cout << "FOUR OF A KIND!" << std::endl;
+                    this->roboPoints2=8;
+                }
+                else if(this->roboDiff[1][1] == 0 && this->roboDiff[2][1] ==0 && 
+                        this->roboDiff[3][1] ==0 && this->roboDiff[4][1] == 0)
+                {
+                    std::cout << "FOUR OF A KIND!" << std::endl;
+                    this->roboPoints2=8;
+                }
+                else if(this->roboDiff[2][1] == 0 && this->roboDiff[3][1] ==0 && 
+                        this->roboDiff[4][1] ==0 && this->roboDiff[5][1] == 0)
+                {
+                    std::cout << "FOUR OF A KIND!" << std::endl;
+                    this->roboPoints2=8;
+                }
+                // ************************************************************************
+                // ************************************************************************
+                //                      FULL HOUSE
+                // ************************************************************************
+                // ************************************************************************  
+                 else if(this->roboDiff[0][1] == 0 && this->roboDiff[2][1] ==0 && this->roboDiff[3][1] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints2=7;
+                }
+                else if(this->roboDiff[0][1] == 0 && this->roboDiff[3][1] ==0 && this->roboDiff[4][1] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints2=7;
+                }
+                else if(this->roboDiff[0][1] == 0 && this->roboDiff[4][1] ==0 && this->roboDiff[5][1] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints2=7;
+                }
+                else if(this->roboDiff[1][1] == 0 && this->roboDiff[3][1] ==0 && this->roboDiff[4][1] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints2=7;
+                }
+                else if(this->roboDiff[1][1] == 0 && this->roboDiff[4][1] ==0 && this->roboDiff[5][1] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints2=7;
+                }
+                else if(this->roboDiff[2][1] == 0 && this->roboDiff[4][1] ==0 && this->roboDiff[5][1] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints2=7;
+                }
+                else if(this->roboDiff[3][1] == 0 && this->roboDiff[0][1] ==0 && this->roboDiff[1][1] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints2=7;
+                }
+                else if(this->roboDiff[4][1] == 0 && this->roboDiff[0][1] ==0 && this->roboDiff[1][1] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints2=7;
+                }
+                else if(this->roboDiff[4][1] == 0 && this->roboDiff[1][1] ==0 && this->roboDiff[2][1] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints2=7;
+                }
+                else if(this->roboDiff[5][1] == 0 && this->roboDiff[0][1] ==0 && this->roboDiff[1][1] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints2=7;
+                }
+                else if(this->roboDiff[5][1] == 0 && this->roboDiff[1][1] ==0 && this->roboDiff[2][1] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints2=7;
+                }
+                else if(this->roboDiff[5][1] == 0 && this->roboDiff[2][1] ==0 && this->roboDiff[3][1] ==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints2=7;
+                }
+                // ************************************************************************
+                // ************************************************************************
+                //                      FLUSH
+                // ************************************************************************
+                // ************************************************************************  
+                else if(this->roboHeartsCount2== 5)
+                {
+                    std::cout << "FLUSH OF HEARTS" <<std::endl;
+                    this->roboPoints2=6;
+                }
+                else if(this->roboSpadesCount2== 5)
+                {
+                    std::cout << "FLUSH OF SPADES" << std::endl;
+                    this->roboPoints2=6;
+                }
+                else if(this->roboDiamondsCount2== 5)
+                {
+                    std::cout << "FLUSH OF DIAMONDS" << std::endl;
+                    this->roboPoints2=6;
+                }
+                else if(this->roboClubsCount2== 5)
+                {
+                    std::cout << "FLUSH OF CLUBS" << std::endl;
+                    this->roboPoints2=6;
+                }
+               // ************************************************************************
+               // ************************************************************************
+               //                      STRAIGHT
+               // ************************************************************************
+               // ************************************************************************   
+                else if(this->roboDiff[0][1] == 1 && this->roboDiff[1][1] == 1 && this->roboDiff[2][1] == 1 &&
+                        this->roboDiff[3][1] == 1 && this->roboDiff[4][1] == 1)
+                {
+                    std::cout << "STRAIGHT" << std::endl;
+                    this->roboPoints2=5;
+                }
+                else if(this->roboDiff[1][1] == 1 && this->roboDiff[2][1] == 1 && this->roboDiff[3][1] == 1 &&
+                        this->roboDiff[4][1] == 1 && this->roboDiff[5][1] == 1)
+                {
+                    std::cout << "STRAIGHT" << std::endl;
+                    this->roboPoints2=5;
+                }
+               // ************************************************************************
+               // ************************************************************************
+               //                      3 of a KIND
+               // ************************************************************************
+               // ************************************************************************
+                else if(this->roboDiff[0][1] == 0 && this->roboDiff[1][1] == 0)
+                {
+                    std::cout << "THREE OF A KIND" << std::endl;
+                    this->roboPoints2=4;
+                }
+                else if(this->roboDiff[1][1] == 0 && this->roboDiff[2][1] == 0)
+                {
+                    std::cout << "THREE OF A KIND" << std::endl;
+                    this->roboPoints2=4;
+                }
+                else if(this->roboDiff[2][1] == 0 && this->roboDiff[3][1] == 0)
+                {
+                    std::cout << "THREE OF A KIND" << std::endl;
+                    this->roboPoints2=4;
+                } 
+                else if(this->roboDiff[3][1] == 0 && this->roboDiff[4][1] == 0)
+                {
+                    std::cout << "THREE OF A KIND" << std::endl;
+                    this->roboPoints2=4;
+                } 
+                else if(this->roboDiff[4][1] == 0 && this->roboDiff[5][1] == 0)
+                {
+                    std::cout << "THREE OF A KIND" << std::endl;
+                    this->roboPoints2=4;
+                } 
+               // ************************************************************************
+               // ************************************************************************
+               //                      2 PAIRS
+               // ************************************************************************
+               // ************************************************************************ 
+                else if(this->roboDiff[0][1] == 0 && this->roboDiff[2][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints2=3;
+                }
+                else if(this->roboDiff[0][1] == 0 && this->roboDiff[3][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints2=3;
+                }
+                else if(this->roboDiff[0][1] == 0 && this->roboDiff[4][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints2=3;
+                }
+                else if(this->roboDiff[0][1] == 0 && this->roboDiff[5][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints2=3;
+                }
+                else if(this->roboDiff[1][1] == 0 && this->roboDiff[3][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints2=3;
+                }
+                else if(this->roboDiff[1][1] == 0 && this->roboDiff[4][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints2=3;
+                }
+                else if(this->roboDiff[1][1] == 0 && this->roboDiff[5][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints2=3;
+                }
+                else if(this->roboDiff[2][1] == 0 && this->roboDiff[0][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints2=3;
+                }
+                else if(this->roboDiff[2][1] == 0 && this->roboDiff[4][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints2=3;
+                }
+                else if(this->roboDiff[2][1] == 0 && this->roboDiff[5][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints2=3;
+                }
+                else if(this->roboDiff[3][1] == 0 && this->roboDiff[0][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints2=3;
+                }
+                else if(this->roboDiff[3][1] == 0 && this->roboDiff[1][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints2=3;
+                }
+                else if(this->roboDiff[3][1] == 0 && this->roboDiff[5][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints2=3;
+                }
+                else if(this->roboDiff[4][1] == 0 && this->roboDiff[0][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints2=3;
+                }
+                else if(this->roboDiff[4][1] == 0 && this->roboDiff[1][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints2=3;
+                }
+                else if(this->roboDiff[4][1] == 0 && this->roboDiff[2][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints2=3;
+                }
+                else if(this->roboDiff[5][1] == 0 && this->roboDiff[0][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints2=3;
+                }
+                else if(this->roboDiff[5][1] == 0 && this->roboDiff[1][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints2=3;
+                }
+                else if(this->roboDiff[5][1] == 0 && this->roboDiff[2][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints2=3;
+                }
+                else if(this->roboDiff[5][1] == 0 && this->roboDiff[3][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints2=3;
+                }
+               // ************************************************************************
+               // ************************************************************************
+               //                      1 PAIR
+               // ************************************************************************
+               // ************************************************************************ 
+                else if(this->roboDiff[0][1] == 0)
+                {
+                    std::cout << "ONE PAIR!" << std::endl;
+                    this->roboPoints2=2;
+                }
+                else if(this->roboDiff[1][1] == 0)
+                {
+                    std::cout << "ONE PAIR!" << std::endl;
+                    this->roboPoints2=2;
+                }
+                else if(this->roboDiff[2][1] == 0)
+                {
+                    std::cout << "ONE PAIR!" << std::endl;
+                    this->roboPoints2=2;
+                }
+                else if(this->roboDiff[3][1] == 0)
+                {
+                    std::cout << "ONE PAIR!" << std::endl;
+                    this->roboPoints2=2;
+                }
+                else if(this->roboDiff[4][1] == 0)
+                {
+                    std::cout << "ONE PAIR!" << std::endl;
+                    this->roboPoints2=2;
+                }
+                else if(this->roboDiff[5][1] == 0)
+                {
+                    std::cout << "ONE PAIR!" << std::endl;
+                    this->roboPoints2=2;
+                }
+                // ************************************************************************
+               // ************************************************************************
+               //                      ELSE HIGHEST CARD
+               // ************************************************************************
+               // ************************************************************************ 
+                else
+                {
+                 std::cout << "HIGHEST CARD: " << this->roboCardNumber[0][1] << std::endl;
+                 this->roboPoints2=1;
+                }
+// ****************************************************************************************
+// ****************************************************************************************
+// ****************************************************************************************
+// ****************************************************************************************
+// ****************************************************************************************                
+                
+                // ************************************************************************
+                // ************************************************************************
+                //                      ROYAL FLUSH
+                // ************************************************************************
+                // ************************************************************************
+                // ROYAL FLUSH: 10 through ACE -- HEARTS
+                if(this->roboHeartsCount3== 5 && this->roboCardNumber[0][2]== 13 &&
+                   this->roboCardNumber[1][2]== 12 && this->roboCardNumber[2][2]== 11 &&
+                   this->roboCardNumber[3][2]== 10 && this->roboCardNumber[7][2]== 1)
+                {
+                    std::cout << "ROYAL FLUSH of HEARTS" << std::endl;
+                    this->roboPoints3=10;
+                }
+                // ROYAL FLUSH: 10 through ACE -- CLUBS
+                else if(this->roboClubsCount3== 5 && this->roboCardNumber[0][2]== 13 &&
+                   this->roboCardNumber[1][2]== 12 && this->roboCardNumber[2][2]== 11 &&
+                   this->roboCardNumber[3][2]== 10 && this->roboCardNumber[7][2]== 1)
+                {
+                    std::cout << "ROYAL FLUSH of CLUBS" << std::endl;
+                    this->roboPoints3=10;
+                }    
+                // ROYAL FLUSH: 10 through ACE -- SPADES
+                else if(this->roboSpadesCount3== 5 && this->roboCardNumber[0][2]== 13 &&
+                   this->roboCardNumber[1][2]== 12 && this->roboCardNumber[2][2]== 11 &&
+                   this->roboCardNumber[3][2]== 10 && this->roboCardNumber[7][2]== 1)
+                {
+                    std::cout << "ROYAL FLUSH of SPADES" << std::endl;
+                    this->roboPoints3=10;
+                }     
+                // ROYAL FLUSH: 10 through ACE -- DIAMONDS
+                else if(this->roboDiamondsCount3== 5 && this->cardNumber[0][2]== 13 &&
+                   this->roboCardNumber[1][2]== 12 && this->roboCardNumber[2][2]== 11 &&
+                   this->roboCardNumber[3][2]== 10 && this->roboCardNumber[7][2]== 1)
+                {
+                    std::cout << "ROYAL FLUSH of DIAMONDS" << std::endl;
+                    this->roboPoints3=10;
+                }       
+                // ************************************************************************
+                // ************************************************************************
+                //                      STRAIGHT FLUSH
+                // ************************************************************************
+                // ************************************************************************    
+                // STRAIGHT FLUSH: ANY SEQUENCE OF FIVE CARDS + SAME SUITS 
+                else if(this->roboHeartsCount3== 5 && this->roboDiff[0][2]== 1 &&
+                   this->roboDiff[1][2]== 1 && this->roboDiff[2][2]== 1 &&
+                   this->roboDiff[3][2]== 1 && this->roboDiff[4][2]== 1)
+                {
+                    std::cout << "STRAIGHT FLUSH of HEARTS" << std::endl;
+                    this->roboPoints3=9;
+                }
+
+                else if(this->roboHeartsCount3== 5 && this->roboDiff[1][2]== 1 &&
+                   this->roboDiff[2][2]== 1 && this->roboDiff[3][2]== 1 &&
+                   this->roboDiff[4][2]== 1 && this->roboDiff[5][2]== 1)
+                {
+                    std::cout << "STRAIGHT FLUSH of HEARTS" << std::endl;
+                    this->roboPoints3=9;
+                }
+                else if(this->roboClubsCount3== 5 && this->roboDiff[0][2]== 1 &&
+                   this->roboDiff[1][2]== 1 && this->roboDiff[2][2]== 1 &&
+                   this->roboDiff[3][2]== 1 && this->roboDiff[4][2]== 1)
+                {
+                    std::cout << "STRAIGHT FLUSH of CLUBS" << std::endl;
+                    this->roboPoints3=9;
+                }
+
+                else if(this->roboClubsCount3== 5 && this->roboDiff[1][2]== 1 &&
+                   this->roboDiff[2][2]== 1 && this->roboDiff[3][2]== 1 &&
+                   this->roboDiff[4][2]== 1 && this->roboDiff[5][2]== 1)
+                {
+                    std::cout << "STRAIGHT FLUSH of CLUBS" << std::endl;
+                    this->roboPoints3=9;
+                }
+                else if(this->roboSpadesCount3== 5 && this->roboDiff[0][2]== 1 &&
+                   this->roboDiff[1][2]== 1 && this->roboDiff[2][2]== 1 &&
+                   this->roboDiff[3][2]== 1 && this->roboDiff[4][2]== 1)
+                {
+                    std::cout << "STRAIGHT FLUSH of SPADES" << std::endl;
+                    this->roboPoints3=9;
+                }
+
+                else if(this->roboSpadesCount3== 5 && this->roboDiff[1][2]== 1 &&
+                   this->roboDiff[2][2]== 1 && this->roboDiff[3][2]== 1 &&
+                   this->roboDiff[4][2]== 1 && this->roboDiff[5][2]== 1)
+                {
+                    std::cout << "STRAIGHT FLUSH of SPADES" << std::endl;
+                    this->roboPoints3=9;
+                }
+                else if(this->roboDiamondsCount3== 5 && this->roboDiff[0][2]== 1 &&
+                   this->roboDiff[1][2]== 1 && this->roboDiff[2][2]== 1 &&
+                   this->roboDiff[3][2]== 1 && this->roboDiff[4][2]== 1)
+                {
+                    std::cout << "STRAIGHT FLUSH of DIAMONDS" << std::endl;
+                    this->roboPoints3=9;
+                }
+
+                else if(this->roboDiamondsCount3== 5 && this->roboDiff[1][2]== 1 &&
+                   this->roboDiff[2][2]== 1 && this->roboDiff[3][2]== 1 &&
+                   this->roboDiff[4][2]== 1 && this->roboDiff[5][2]== 1)
+                {
+                    std::cout << "STRAIGHT FLUSH of DIAMONDS" << std::endl;
+                    this->roboPoints3=9;
+                }       
+                // ************************************************************************
+                // ************************************************************************
+                //                      FOUR OF A KIND
+                // ************************************************************************
+                // ************************************************************************    
+                else if(this->roboDiff[0][2]== 0 && this->roboDiff[1][2]==0 && 
+                        this->roboDiff[2][2]==0 && this->roboDiff[3][2]== 0)
+                {
+                    std::cout << "FOUR OF A KIND!" << std::endl;
+                    this->roboPoints3=8;
+                }
+                else if(this->roboDiff[1][2]== 0 && this->roboDiff[2][2]==0 && 
+                        this->roboDiff[3][2]==0 && this->roboDiff[4][2]== 0)
+                {
+                    std::cout << "FOUR OF A KIND!" << std::endl;
+                    this->roboPoints3=8;
+                }
+                else if(this->roboDiff[2][2]== 0 && this->roboDiff[3][2]==0 && 
+                        this->roboDiff[4][2]==0 && this->roboDiff[5][2]== 0)
+                {
+                    std::cout << "FOUR OF A KIND!" << std::endl;
+                    this->roboPoints3=8;
+                }
+                // ************************************************************************
+                // ************************************************************************
+                //                      FULL HOUSE
+                // ************************************************************************
+                // ************************************************************************  
+                 else if(this->roboDiff[0][2]== 0 && this->roboDiff[2][2]==0 && this->roboDiff[3][2]==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints3=7;
+                }
+                else if(this->roboDiff[0][2]== 0 && this->roboDiff[3][2]==0 && this->roboDiff[4][2]==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints3=7;
+                }
+                else if(this->roboDiff[0][2]== 0 && this->roboDiff[4][2]==0 && this->roboDiff[5][2]==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints3=7;
+                }
+                else if(this->roboDiff[1][2]== 0 && this->roboDiff[3][2]==0 && this->roboDiff[4][2]==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints3=7;
+                }
+                else if(this->roboDiff[1][2]== 0 && this->roboDiff[4][2]==0 && this->roboDiff[5][2]==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints3=7;
+                }
+                else if(this->roboDiff[2][2]== 0 && this->roboDiff[4][2]==0 && this->roboDiff[5][2]==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints3=7;
+                }
+                else if(this->roboDiff[3][2]== 0 && this->roboDiff[0][2]==0 && this->roboDiff[1][2]==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints3=7;
+                }
+                else if(this->roboDiff[4][2]== 0 && this->roboDiff[0][2]==0 && this->roboDiff[1][2]==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints3=7;
+                }
+                else if(this->roboDiff[4][2]== 0 && this->roboDiff[1][2]==0 && this->roboDiff[2][2]==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints3=7;
+                }
+                else if(this->roboDiff[5][2]== 0 && this->roboDiff[0][2]==0 && this->roboDiff[1][2]==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints3=7;
+                }
+                else if(this->roboDiff[5][2]== 0 && this->roboDiff[1][2]==0 && this->roboDiff[2][2]==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints3=7;
+                }
+                else if(this->roboDiff[5][2]== 0 && this->roboDiff[2][2]==0 && this->roboDiff[3][2]==0)
+                {
+                    std::cout << "FULL HOUSE!" << std::endl;
+                    this->roboPoints3=7;
+                }
+                // ************************************************************************
+                // ************************************************************************
+                //                      FLUSH
+                // ************************************************************************
+                // ************************************************************************  
+                else if(this->roboHeartsCount3== 5)
+                {
+                    std::cout << "FLUSH OF HEARTS" <<std::endl;
+                    this->roboPoints3=6;
+                }
+                else if(this->roboSpadesCount3== 5)
+                {
+                    std::cout << "FLUSH OF SPADES" << std::endl;
+                    this->roboPoints3=6;
+                }
+                else if(this->roboDiamondsCount3== 5)
+                {
+                    std::cout << "FLUSH OF DIAMONDS" << std::endl;
+                    this->roboPoints3=6;
+                }
+                else if(this->roboClubsCount3== 5)
+                {
+                    std::cout << "FLUSH OF CLUBS" << std::endl;
+                    this->roboPoints3=6;
+                }
+               // ************************************************************************
+               // ************************************************************************
+               //                      STRAIGHT
+               // ************************************************************************
+               // ************************************************************************   
+                else if(this->roboDiff[0][2]== 1 && this->roboDiff[1][2]== 1 && this->roboDiff[2][2]== 1 &&
+                        this->roboDiff[3][2]== 1 && this->roboDiff[4][2]== 1)
+                {
+                    std::cout << "STRAIGHT" << std::endl;
+                    this->roboPoints3=5;
+                }
+                else if(this->roboDiff[1][2]== 1 && this->roboDiff[2][2]== 1 && this->roboDiff[3][2]== 1 &&
+                        this->roboDiff[4][2]== 1 && this->roboDiff[5][2]== 1)
+                {
+                    std::cout << "STRAIGHT" << std::endl;
+                    this->roboPoints3=5;
+                }
+               // ************************************************************************
+               // ************************************************************************
+               //                      3 of a KIND
+               // ************************************************************************
+               // ************************************************************************
+                else if(this->roboDiff[0][2]== 0 && this->roboDiff[1][2]== 0)
+                {
+                    std::cout << "THREE OF A KIND" << std::endl;
+                    this->roboPoints3=4;
+                }
+                else if(this->roboDiff[1][2]== 0 && this->roboDiff[2][2]== 0)
+                {
+                    std::cout << "THREE OF A KIND" << std::endl;
+                    this->roboPoints3=4;
+                }
+                else if(this->roboDiff[2][2]== 0 && this->roboDiff[3][2]== 0)
+                {
+                    std::cout << "THREE OF A KIND" << std::endl;
+                    this->roboPoints3=4;
+                } 
+                else if(this->roboDiff[3][2]== 0 && this->roboDiff[4][2]== 0)
+                {
+                    std::cout << "THREE OF A KIND" << std::endl;
+                    this->roboPoints3=4;
+                } 
+                else if(this->roboDiff[4][2]== 0 && this->roboDiff[5][2]== 0)
+                {
+                    std::cout << "THREE OF A KIND" << std::endl;
+                    this->roboPoints3=4;
+                } 
+               // ************************************************************************
+               // ************************************************************************
+               //                      2 PAIRS
+               // ************************************************************************
+               // ************************************************************************ 
+                else if(this->roboDiff[0][2]== 0 && this->roboDiff[2][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints3=3;
+                }
+                else if(this->roboDiff[0][2]== 0 && this->roboDiff[3][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints3=3;
+                }
+                else if(this->roboDiff[0][2]== 0 && this->roboDiff[4][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints3=3;
+                }
+                else if(this->roboDiff[0][2]== 0 && this->roboDiff[5][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints3=3;
+                }
+                else if(this->roboDiff[1][2]== 0 && this->roboDiff[3][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints3=3;
+                }
+                else if(this->roboDiff[1][2]== 0 && this->roboDiff[4][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints3=3;
+                }
+                else if(this->roboDiff[1][2]== 0 && this->roboDiff[5][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints3=3;
+                }
+                else if(this->roboDiff[2][2]== 0 && this->roboDiff[0][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints3=3;
+                }
+                else if(this->roboDiff[2][2]== 0 && this->roboDiff[4][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints3=3;
+                }
+                else if(this->roboDiff[2][2]== 0 && this->roboDiff[5][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints3=3;
+                }
+                else if(this->roboDiff[3][2]== 0 && this->roboDiff[0][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints3=3;
+                }
+                else if(this->roboDiff[3][2]== 0 && this->roboDiff[1][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints3=3;
+                }
+                else if(this->roboDiff[3][2]== 0 && this->roboDiff[5][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints3=3;
+                }
+                else if(this->roboDiff[4][2]== 0 && this->roboDiff[0][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints3=3;
+                }
+                else if(this->roboDiff[4][2]== 0 && this->roboDiff[1][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints3=3;
+                }
+                else if(this->roboDiff[4][2]== 0 && this->roboDiff[2][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints3=3;
+                }
+                else if(this->roboDiff[5][2]== 0 && this->roboDiff[0][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints3=3;
+                }
+                else if(this->roboDiff[5][2]== 0 && this->roboDiff[1][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints3=3;
+                }
+                else if(this->roboDiff[5][2]== 0 && this->roboDiff[2][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints3=3;
+                }
+                else if(this->roboDiff[5][2]== 0 && this->roboDiff[3][1]==0)
+                {
+                    std::cout << "TWO PAIRS" << std::endl;
+                    this->roboPoints3=3;
+                }
+               // ************************************************************************
+               // ************************************************************************
+               //                      1 PAIR
+               // ************************************************************************
+               // ************************************************************************ 
+                else if(this->roboDiff[0][2]== 0)
+                {
+                    std::cout << "ONE PAIR!" << std::endl;
+                    this->roboPoints3=2;
+                }
+                else if(this->roboDiff[1][2]== 0)
+                {
+                    std::cout << "ONE PAIR!" << std::endl;
+                    this->roboPoints3=2;
+                }
+                else if(this->roboDiff[2][2]== 0)
+                {
+                    std::cout << "ONE PAIR!" << std::endl;
+                    this->roboPoints3=2;
+                }
+                else if(this->roboDiff[3][2]== 0)
+                {
+                    std::cout << "ONE PAIR!" << std::endl;
+                    this->roboPoints3=2;
+                }
+                else if(this->roboDiff[4][2]== 0)
+                {
+                    std::cout << "ONE PAIR!" << std::endl;
+                    this->roboPoints3=2;
+                }
+                else if(this->roboDiff[5][2] == 0)
+                {
+                    std::cout << "ONE PAIR!" << std::endl;
+                    this->roboPoints3=2;
+                }
+                // ************************************************************************
+               // ************************************************************************
+               //                      ELSE HIGHEST CARD
+               // ************************************************************************
+               // ************************************************************************ 
+                else
+                {
+                 std::cout << "HIGHEST CARD: " << this->roboCardNumber[0][2] << std::endl;
+                 this->roboPoints3=1;
+                }
+                break;                                
+        }
     }
-    // ROYAL FLUSH: 10 through ACE -- CLUBS
-    else if(this->roboClubsCount == 5 && this->roboCardNumber[0] == 13 &&
-       this->roboCardNumber[1] == 12 && this->roboCardNumber[2] == 11 &&
-       this->roboCardNumber[3] == 10 && this->roboCardNumber[7] == 1)
-    {
-        std::cout << "ROYAL FLUSH of CLUBS" << std::endl;
-        this->roboPoints=10;
-    }    
-    // ROYAL FLUSH: 10 through ACE -- SPADES
-    else if(this->roboSpadesCount == 5 && this->roboCardNumber[0] == 13 &&
-       this->roboCardNumber[1] == 12 && this->roboCardNumber[2] == 11 &&
-       this->roboCardNumber[3] == 10 && this->roboCardNumber[7] == 1)
-    {
-        std::cout << "ROYAL FLUSH of SPADES" << std::endl;
-        this->roboPoints=10;
-    }     
-    // ROYAL FLUSH: 10 through ACE -- DIAMONDS
-    else if(this->roboDiamondsCount == 5 && this->cardNumber[0] == 13 &&
-       this->roboCardNumber[1] == 12 && this->roboCardNumber[2] == 11 &&
-       this->roboCardNumber[3] == 10 && this->roboCardNumber[7] == 1)
-    {
-        std::cout << "ROYAL FLUSH of DIAMONDS" << std::endl;
-        this->roboPoints=10;
-    }       
-    // ************************************************************************
-    // ************************************************************************
-    //                      STRAIGHT FLUSH
-    // ************************************************************************
-    // ************************************************************************    
-    // STRAIGHT FLUSH: ANY SEQUENCE OF FIVE CARDS + SAME SUITS 
-    else if(this->roboHeartsCount == 5 && this->roboDiff[0] == 1 &&
-       this->roboDiff[1] == 1 && this->roboDiff[2] == 1 &&
-       this->roboDiff[3] == 1 && this->roboDiff[4] == 1)
-    {
-        std::cout << "STRAIGHT FLUSH of HEARTS" << std::endl;
-        this->roboPoints=9;
-    }
-    
-    else if(this->roboHeartsCount == 5 && this->roboDiff[1] == 1 &&
-       this->roboDiff[2] == 1 && this->roboDiff[3] == 1 &&
-       this->roboDiff[4] == 1 && this->roboDiff[5] == 1)
-    {
-        std::cout << "STRAIGHT FLUSH of HEARTS" << std::endl;
-        this->roboPoints=9;
-    }
-    else if(this->roboClubsCount == 5 && this->roboDiff[0] == 1 &&
-       this->roboDiff[1] == 1 && this->roboDiff[2] == 1 &&
-       this->roboDiff[3] == 1 && this->roboDiff[4] == 1)
-    {
-        std::cout << "STRAIGHT FLUSH of CLUBS" << std::endl;
-        this->roboPoints=9;
-    }
-    
-    else if(this->roboClubsCount == 5 && this->roboDiff[1] == 1 &&
-       this->roboDiff[2] == 1 && this->roboDiff[3] == 1 &&
-       this->roboDiff[4] == 1 && this->roboDiff[5] == 1)
-    {
-        std::cout << "STRAIGHT FLUSH of CLUBS" << std::endl;
-        this->roboPoints=9;
-    }
-    else if(this->roboSpadesCount == 5 && this->roboDiff[0] == 1 &&
-       this->roboDiff[1] == 1 && this->roboDiff[2] == 1 &&
-       this->roboDiff[3] == 1 && this->roboDiff[4] == 1)
-    {
-        std::cout << "STRAIGHT FLUSH of SPADES" << std::endl;
-        this->roboPoints=9;
-    }
-    
-    else if(this->roboSpadesCount == 5 && this->roboDiff[1] == 1 &&
-       this->roboDiff[2] == 1 && this->roboDiff[3] == 1 &&
-       this->roboDiff[4] == 1 && this->roboDiff[5] == 1)
-    {
-        std::cout << "STRAIGHT FLUSH of SPADES" << std::endl;
-        this->roboPoints=9;
-    }
-    else if(this->roboDiamondsCount == 5 && this->roboDiff[0] == 1 &&
-       this->roboDiff[1] == 1 && this->roboDiff[2] == 1 &&
-       this->roboDiff[3] == 1 && this->roboDiff[4] == 1)
-    {
-        std::cout << "STRAIGHT FLUSH of DIAMONDS" << std::endl;
-        this->roboPoints=9;
-    }
-    
-    else if(this->roboDiamondsCount == 5 && this->roboDiff[1] == 1 &&
-       this->roboDiff[2] == 1 && this->roboDiff[3] == 1 &&
-       this->roboDiff[4] == 1 && this->roboDiff[5] == 1)
-    {
-        std::cout << "STRAIGHT FLUSH of DIAMONDS" << std::endl;
-        this->roboPoints=9;
-    }       
-    // ************************************************************************
-    // ************************************************************************
-    //                      FOUR OF A KIND
-    // ************************************************************************
-    // ************************************************************************    
-    else if(this->roboDiff[0] == 0 && this->roboDiff[1] ==0 && 
-            this->roboDiff[2] ==0 && this->roboDiff[3] == 0)
-    {
-        std::cout << "FOUR OF A KIND!" << std::endl;
-        this->roboPoints=8;
-    }
-    else if(this->roboDiff[1] == 0 && this->roboDiff[2] ==0 && 
-            this->roboDiff[3] ==0 && this->roboDiff[4] == 0)
-    {
-        std::cout << "FOUR OF A KIND!" << std::endl;
-        this->roboPoints=8;
-    }
-    else if(this->roboDiff[2] == 0 && this->roboDiff[3] ==0 && 
-            this->roboDiff[4] ==0 && this->roboDiff[5] == 0)
-    {
-        std::cout << "FOUR OF A KIND!" << std::endl;
-        this->roboPoints=8;
-    }
-    // ************************************************************************
-    // ************************************************************************
-    //                      FULL HOUSE
-    // ************************************************************************
-    // ************************************************************************  
-     else if(this->roboDiff[0] == 0 && this->roboDiff[2] ==0 && this->roboDiff[3] ==0)
-    {
-        std::cout << "FULL HOUSE!" << std::endl;
-        this->roboPoints=7;
-    }
-    else if(this->roboDiff[0] == 0 && this->roboDiff[3] ==0 && this->roboDiff[4] ==0)
-    {
-        std::cout << "FULL HOUSE!" << std::endl;
-        this->roboPoints=7;
-    }
-    else if(this->roboDiff[0] == 0 && this->roboDiff[4] ==0 && this->roboDiff[5] ==0)
-    {
-        std::cout << "FULL HOUSE!" << std::endl;
-        this->roboPoints=7;
-    }
-    else if(this->roboDiff[1] == 0 && this->roboDiff[3] ==0 && this->roboDiff[4] ==0)
-    {
-        std::cout << "FULL HOUSE!" << std::endl;
-        this->roboPoints=7;
-    }
-    else if(this->roboDiff[1] == 0 && this->roboDiff[4] ==0 && this->roboDiff[5] ==0)
-    {
-        std::cout << "FULL HOUSE!" << std::endl;
-        this->roboPoints=7;
-    }
-    else if(this->roboDiff[2] == 0 && this->roboDiff[4] ==0 && this->roboDiff[5] ==0)
-    {
-        std::cout << "FULL HOUSE!" << std::endl;
-        this->roboPoints=7;
-    }
-    else if(this->roboDiff[3] == 0 && this->roboDiff[0] ==0 && this->roboDiff[1] ==0)
-    {
-        std::cout << "FULL HOUSE!" << std::endl;
-        this->roboPoints=7;
-    }
-    else if(this->roboDiff[4] == 0 && this->roboDiff[0] ==0 && this->roboDiff[1] ==0)
-    {
-        std::cout << "FULL HOUSE!" << std::endl;
-        this->roboPoints=7;
-    }
-    else if(this->roboDiff[4] == 0 && this->roboDiff[1] ==0 && this->roboDiff[2] ==0)
-    {
-        std::cout << "FULL HOUSE!" << std::endl;
-        this->roboPoints=7;
-    }
-    else if(this->roboDiff[5] == 0 && this->roboDiff[0] ==0 && this->roboDiff[1] ==0)
-    {
-        std::cout << "FULL HOUSE!" << std::endl;
-        this->roboPoints=7;
-    }
-    else if(this->roboDiff[5] == 0 && this->roboDiff[1] ==0 && this->roboDiff[2] ==0)
-    {
-        std::cout << "FULL HOUSE!" << std::endl;
-        this->roboPoints=7;
-    }
-    else if(this->roboDiff[5] == 0 && this->roboDiff[2] ==0 && this->roboDiff[3] ==0)
-    {
-        std::cout << "FULL HOUSE!" << std::endl;
-        this->roboPoints=7;
-    }
-    // ************************************************************************
-    // ************************************************************************
-    //                      FLUSH
-    // ************************************************************************
-    // ************************************************************************  
-    else if(this->roboHeartsCount == 5)
-    {
-        std::cout << "FLUSH OF HEARTS" <<std::endl;
-        this->roboPoints=6;
-    }
-    else if(this->roboSpadesCount == 5)
-    {
-        std::cout << "FLUSH OF SPADES" << std::endl;
-        this->roboPoints=6;
-    }
-    else if(this->roboDiamondsCount == 5)
-    {
-        std::cout << "FLUSH OF DIAMONDS" << std::endl;
-        this->roboPoints=6;
-    }
-    else if(this->roboClubsCount == 5)
-    {
-        std::cout << "FLUSH OF CLUBS" << std::endl;
-        this->roboPoints=6;
-    }
-   // ************************************************************************
-   // ************************************************************************
-   //                      STRAIGHT
-   // ************************************************************************
-   // ************************************************************************   
-    else if(this->roboDiff[0] == 1 && this->roboDiff[1] == 1 && this->roboDiff[2] == 1 &&
-            this->roboDiff[3] == 1 && this->roboDiff[4] == 1)
-    {
-        std::cout << "STRAIGHT" << std::endl;
-        this->roboPoints=5;
-    }
-    else if(this->roboDiff[1] == 1 && this->roboDiff[2] == 1 && this->roboDiff[3] == 1 &&
-            this->roboDiff[4] == 1 && this->roboDiff[5] == 1)
-    {
-        std::cout << "STRAIGHT" << std::endl;
-        this->roboPoints=5;
-    }
-   // ************************************************************************
-   // ************************************************************************
-   //                      3 of a KIND
-   // ************************************************************************
-   // ************************************************************************
-    else if(this->roboDiff[0] == 0 && this->roboDiff[1] == 0)
-    {
-        std::cout << "THREE OF A KIND" << std::endl;
-        this->roboPoints=4;
-    }
-    else if(this->roboDiff[1] == 0 && this->roboDiff[2] == 0)
-    {
-        std::cout << "THREE OF A KIND" << std::endl;
-        this->roboPoints=4;
-    }
-    else if(this->roboDiff[2] == 0 && this->roboDiff[3] == 0)
-    {
-        std::cout << "THREE OF A KIND" << std::endl;
-        this->roboPoints=4;
-    } 
-    else if(this->roboDiff[3] == 0 && this->roboDiff[4] == 0)
-    {
-        std::cout << "THREE OF A KIND" << std::endl;
-        this->roboPoints=4;
-    } 
-    else if(this->roboDiff[4] == 0 && this->roboDiff[5] == 0)
-    {
-        std::cout << "THREE OF A KIND" << std::endl;
-        this->roboPoints=4;
-    } 
-   // ************************************************************************
-   // ************************************************************************
-   //                      2 PAIRS
-   // ************************************************************************
-   // ************************************************************************ 
-    else if(this->roboDiff[0] == 0 && this->roboDiff[2]==0)
-    {
-        std::cout << "TWO PAIRS" << std::endl;
-        this->roboPoints=3;
-    }
-    else if(this->roboDiff[0] == 0 && this->roboDiff[3]==0)
-    {
-        std::cout << "TWO PAIRS" << std::endl;
-        this->roboPoints=3;
-    }
-    else if(this->roboDiff[0] == 0 && this->roboDiff[4]==0)
-    {
-        std::cout << "TWO PAIRS" << std::endl;
-        this->roboPoints=3;
-    }
-    else if(this->roboDiff[0] == 0 && this->roboDiff[5]==0)
-    {
-        std::cout << "TWO PAIRS" << std::endl;
-        this->roboPoints=3;
-    }
-    else if(this->roboDiff[1] == 0 && this->roboDiff[3]==0)
-    {
-        std::cout << "TWO PAIRS" << std::endl;
-        this->roboPoints=3;
-    }
-    else if(this->roboDiff[1] == 0 && this->roboDiff[4]==0)
-    {
-        std::cout << "TWO PAIRS" << std::endl;
-        this->roboPoints=3;
-    }
-    else if(this->roboDiff[1] == 0 && this->roboDiff[5]==0)
-    {
-        std::cout << "TWO PAIRS" << std::endl;
-        this->roboPoints=3;
-    }
-    else if(this->roboDiff[2] == 0 && this->roboDiff[0]==0)
-    {
-        std::cout << "TWO PAIRS" << std::endl;
-        this->roboPoints=3;
-    }
-    else if(this->roboDiff[2] == 0 && this->roboDiff[4]==0)
-    {
-        std::cout << "TWO PAIRS" << std::endl;
-        this->roboPoints=3;
-    }
-    else if(this->roboDiff[2] == 0 && this->roboDiff[5]==0)
-    {
-        std::cout << "TWO PAIRS" << std::endl;
-        this->roboPoints=3;
-    }
-    else if(this->roboDiff[3] == 0 && this->roboDiff[0]==0)
-    {
-        std::cout << "TWO PAIRS" << std::endl;
-        this->roboPoints=3;
-    }
-    else if(this->roboDiff[3] == 0 && this->roboDiff[1]==0)
-    {
-        std::cout << "TWO PAIRS" << std::endl;
-        this->roboPoints=3;
-    }
-    else if(this->roboDiff[3] == 0 && this->roboDiff[5]==0)
-    {
-        std::cout << "TWO PAIRS" << std::endl;
-        this->roboPoints=3;
-    }
-    else if(this->roboDiff[4] == 0 && this->roboDiff[0]==0)
-    {
-        std::cout << "TWO PAIRS" << std::endl;
-        this->roboPoints=3;
-    }
-    else if(this->roboDiff[4] == 0 && this->roboDiff[1]==0)
-    {
-        std::cout << "TWO PAIRS" << std::endl;
-        this->roboPoints=3;
-    }
-    else if(this->roboDiff[4] == 0 && this->roboDiff[2]==0)
-    {
-        std::cout << "TWO PAIRS" << std::endl;
-        this->roboPoints=3;
-    }
-    else if(this->roboDiff[5] == 0 && this->roboDiff[0]==0)
-    {
-        std::cout << "TWO PAIRS" << std::endl;
-        this->roboPoints=3;
-    }
-    else if(this->roboDiff[5] == 0 && this->roboDiff[1]==0)
-    {
-        std::cout << "TWO PAIRS" << std::endl;
-        this->roboPoints=3;
-    }
-    else if(this->roboDiff[5] == 0 && this->roboDiff[2]==0)
-    {
-        std::cout << "TWO PAIRS" << std::endl;
-        this->roboPoints=3;
-    }
-    else if(this->roboDiff[5] == 0 && this->roboDiff[3]==0)
-    {
-        std::cout << "TWO PAIRS" << std::endl;
-        this->roboPoints=3;
-    }
-   // ************************************************************************
-   // ************************************************************************
-   //                      1 PAIR
-   // ************************************************************************
-   // ************************************************************************ 
-    else if(this->roboDiff[0] == 0)
-    {
-        std::cout << "ONE PAIR!" << std::endl;
-        this->roboPoints=2;
-    }
-    else if(this->roboDiff[1] == 0)
-    {
-        std::cout << "ONE PAIR!" << std::endl;
-        this->roboPoints=2;
-    }
-    else if(this->roboDiff[2] == 0)
-    {
-        std::cout << "ONE PAIR!" << std::endl;
-        this->roboPoints=2;
-    }
-    else if(this->roboDiff[3] == 0)
-    {
-        std::cout << "ONE PAIR!" << std::endl;
-        this->roboPoints=2;
-    }
-    else if(this->roboDiff[4] == 0)
-    {
-        std::cout << "ONE PAIR!" << std::endl;
-        this->roboPoints=2;
-    }
-    else if(this->roboDiff[5] == 0)
-    {
-        std::cout << "ONE PAIR!" << std::endl;
-        this->roboPoints=2;
-    }
-    // ************************************************************************
-   // ************************************************************************
-   //                      ELSE HIGHEST CARD
-   // ************************************************************************
-   // ************************************************************************ 
-    else
-    {
-     std::cout << "HIGHEST CARD: " << this->roboCardNumber[0] << std::endl;
-     this->roboPoints=1;
-    }
-   
 }
 
 void TexasHoldem::declareWinner()
@@ -2474,4 +5088,36 @@ void TexasHoldem::writeData(std::ofstream &file,int num)
 
 
 
-
+    void TexasHoldem::setRoboChips(int chips)
+    {
+        this->roboChips = chips;
+    }
+    int  TexasHoldem::getRoboChips()
+    {
+        return this->roboChips;
+    }
+    void TexasHoldem::setNumOfPlayers(int SIZE)
+    {
+        this->NumofPlayers = SIZE;
+    }
+    int  TexasHoldem::getNumOfPlayers()
+    {
+        return this->NumofPlayers;
+    }
+    
+    void TexasHoldem::generateNumofPlayers()
+    {
+        int temp;
+         temp = ((rand() % 1) + 3);
+         std::endl;
+         std::cout << temp << " players have joined the table! ";
+         this->setNumOfPlayers(temp);
+    }
+    
+    int* TexasHoldem::createArrOfPlayers(int SIZE)
+    {
+        // Multi-dimensional Array that holds 7 cards per player
+        int* temp = new int[SIZE][7];
+        
+        return temp;
+    }
